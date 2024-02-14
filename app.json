@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Vehicle_Repairo_App",
-    "slug": "Vehicle_Repairo_App",
+    "name": "vehicle_Repairo",
+    "slug": "vehicle_Repairo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
