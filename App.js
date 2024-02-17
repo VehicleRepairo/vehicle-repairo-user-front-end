@@ -1,11 +1,13 @@
 import React from 'react'
-import Mileage from './Screens/mileage';
+
+import MainContainer from './navigation/main';
+
 
 
 export default function App() {
   return(
     <>
-    <Mileage/>
+    <MainContainer/>
     </>
   );
 } 
