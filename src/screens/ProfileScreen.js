@@ -20,9 +20,7 @@ const ProfileScreen = ({route}) => {
     appointmentStatus: 'Scheduled',
   });
 
-  const onEditButtonPressed = () => {
-    setIsEditing(true);
-  };
+  
 
   const onSaveProfilepressed = (updatedUserData) => {
     setUserData(updatedUserData);
@@ -33,28 +31,15 @@ const ProfileScreen = ({route}) => {
     setIsEditing(false);
   };
 
-  const onAddVehiclePressed = () => {
-   
-   console.warn('Add a Vehicle')
+  const onLogoutPressed = () => {
+  navigation.navigate('Start Page')
+  };
+  const onEditButtonPressed = () => {
+    setIsEditing(true);
   };
 
-  const onDeleteAccountPressed = () => {
-    Alert.alert(
-      'Delete Account',
-      'Do you want to delete your account permantetly?',
-       
-      [
-        {text:'Cancel',style:'cancel',},
-        {text:'Delete', onPress:()=>deleteAccount()},
-      ],
-        {cancelable:false}
-      
-    );
-  };
-
-  const deleteAccount=() => {
-    console.warn('Account deleted!')
-  }
+  
+  
 
   ;
 
@@ -64,7 +49,7 @@ const ProfileScreen = ({route}) => {
   return (
     <ScrollView>
     <View style={styles.container}>
-    <TouchableOpacity onPress={onEditButtonPressed} style={styles.editButton}><Text>Edit</Text></TouchableOpacity>
+   
      
       <Text style={styles.title}> {userData.userName} </Text>
 
@@ -86,13 +71,16 @@ const ProfileScreen = ({route}) => {
         <Text style={styles.label}>Appointment Status </Text>
         <Text style={styles.label2}>{userData.appointmentStatus}</Text>
 
-        <TouchableOpacity onPress={onAddVehiclePressed} style={styles.addButton}>
+        <View style={{flexDirection:'row'}}> 
+        <TouchableOpacity onPress={onLogoutPressed} style={styles.logoutButton}>
+        <Text style={styles.text1}>Logout</Text></TouchableOpacity>
+        <TouchableOpacity onPress={onEditButtonPressed} style={styles.editButton}>
+        <Text style={styles.editText}>Edit</Text></TouchableOpacity>
+</View>
+       
+      
+       
         
-          <Text style={styles.text1}>+ Add a Vehicle</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onDeleteAccountPressed} style={styles.deleteButton}>
-          <Text style={styles.text2}>Delete Account</Text>
-        </TouchableOpacity>
    
 
       {isEditing && (
@@ -101,6 +89,7 @@ const ProfileScreen = ({route}) => {
           onSave={onSaveProfilepressed}
           onCancel={onCancelEditpressed}
         />
+         
       )}
   
     </ScrollView>
@@ -108,20 +97,11 @@ const ProfileScreen = ({route}) => {
 };
 
 const styles = StyleSheet.create({
- editButton:{
-  padding:1,
-    backgroundColor: '#eee',
-    borderRadius: 5,
-    height:40,
-    width: '12%',
-    borderWidth:1,
-    borderRadius:10,
-    padding:8.5,
+  container:{
+    flex:1,
     
-    alignItems: 'center',
-    marginLeft:320,
- },
-  
+},
+ 
   separator: {
     marginVertical: 8,
     borderBottomColor: '#737373',
@@ -131,28 +111,23 @@ const styles = StyleSheet.create({
     marginLeft:162,
     fontSize:20,
 
-   
   },
   profilePicture: {
     marginLeft:135,
         borderRadius:200,
         width:130,
         height:130,
-        
     
   },
   title1:{
     marginLeft:155,
     fontSize:14,
-  
 
 },
   
-  bottomSection: {
-    marginTop: 20,
-  },
+ 
   label: {
-    marginVertical:2,
+    marginVertical:4,
     fontSize: 16,
     marginBottom: 10,
     marginLeft:55,
@@ -163,45 +138,57 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
     marginLeft:55,
+    marginVertical:4,
     
   },
-  addButton: {
-    height:44,
-    backgroundColor:'#1D2B78',
-    width: '65%',
+  editButton:{
+    height: 47,
+    borderColor: 'black',
+    width: '35%',
     borderWidth:1,
-    borderRadius:50,
+    borderRadius:24,
+    paddingHorizontal:20,
     padding:8.5,
-    marginVertical: 7,
-    alignItems: 'center',
-    marginLeft:65,
-    borderBottomWidth:4,
-    borderColor:'#E2E2E2'
+    marginVertical: 30,
+    marginLeft:30
+
+  
   },
-  deleteButton: {
-    height:40,
-    borderColor:'red',
-    width: '65%',
+  logoutButton:{
+    height: 47,
+    backgroundColor: '#1D2B78',
+    width: '35%',
     borderWidth:1,
-    borderRadius:50,
+    borderRadius:24,
+    paddingHorizontal:20,
     padding:8.5,
-    marginVertical: 5,
-    alignItems: 'center',
-    marginLeft:65,
+    marginVertical: 30,
+    marginLeft:40
+
+  },
+  editText:{
+    fontWeight:'bold',
+    fontSize:15,
+    marginLeft:34,
+    paddingVertical:2.5
     
+    
+
+
   },
+
   text1:{
-    fontWeight: 'bold',
-        color: 'white',
-        fontWeight:'bold',
-        fontSize:15,
+    fontWeight:'bold',
+    fontSize:15,
+    marginLeft:25,
+    paddingVertical:2.5,
+    color:'white'
+    
+    
+    
+
   },
-  text2:{
-    fontWeight: 'bold',
-        color: 'red',
-        fontWeight:'bold',
-        fontSize:15,
-  },
+  
 });
 
 export default ProfileScreen;
