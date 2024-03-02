@@ -108,8 +108,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   title:{
-    marginLeft:162,
+    marginLeft:158,
     fontSize:20,
+    marginTop:90
 
   },
   profilePicture: {

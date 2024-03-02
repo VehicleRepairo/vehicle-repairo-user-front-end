@@ -82,13 +82,15 @@ const HomeScreen = ({route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding:10,
+    
+    marginTop:80,
    
   },
   background: {
     flex: 1,
     resizeMode: 'cover', 
-    paddingTop:1,
+    paddingTop:10,
+    
 
     
   },
@@ -185,14 +187,9 @@ Integer:{
     paddingHorizontal:15,
     padding:20,
     marginLeft:260,
-    
-   
-    
-    
-
-
-    
+  
 },
+
 
 
 

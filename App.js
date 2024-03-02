@@ -18,8 +18,8 @@ const Stack =createStackNavigator();
 function App(){
   return (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName='Start Page'>
-    <Stack.Screen name='Start Page' component={StartPageScreen}/>
+    <Stack.Navigator initialRouteName='Start Page' headerMode='none'>
+    <Stack.Screen name='Start Page' component={StartPageScreen} />
     <Stack.Screen name='Login' component={LoginScreen}/>
     <Stack.Screen name='Signup' component={SignupScreen}/>
     <Stack.Screen name='Add Vehicle Details' component={AddVehicleDetailsScreen}/>

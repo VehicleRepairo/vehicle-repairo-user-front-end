@@ -49,8 +49,6 @@ const AddVehicleDetailsScreen = () => {
       
       <Text 
       style={styles.vehicletype}
-      paddingBottom='0.9%'
-      paddingTop='0.9%'
       > Vehicle Type</Text>
 
        <TextInput 
@@ -63,8 +61,6 @@ const AddVehicleDetailsScreen = () => {
 
        <Text 
        style={styles.brand}
-       paddingBottom='0.9%'
-       paddingTop='0.9%'
        > Brand</Text>     
 
         <TextInput 
@@ -78,8 +74,6 @@ const AddVehicleDetailsScreen = () => {
 
         <Text 
       style={styles.model}
-      paddingBottom='0.9%'
-      paddingTop='0.9%'
       > Model</Text>         
       
        <TextInput 
@@ -93,8 +87,6 @@ const AddVehicleDetailsScreen = () => {
 
       <Text 
       style={styles.enginetype}
-      paddingBottom='0.9%'
-      paddingTop='0.9%'
        > Engine Type</Text> 
 
    
@@ -108,8 +100,7 @@ const AddVehicleDetailsScreen = () => {
            
        <Text 
       style={styles.mileagedriven}
-      paddingBottom='0.9%'
-      paddingTop='0.9%'
+      
       > Mileage Driven</Text> 
 
        <TextInput 
@@ -153,7 +144,7 @@ const styles=StyleSheet.create({
         borderWidth:1,
         borderRadius:50,
         padding:9,
-        marginVertical: 65,
+        marginVertical: 70,
         alignItems: 'center',
         borderBottomWidth:4,
     borderColor:'#E2E2E2'
@@ -169,7 +160,6 @@ const styles=StyleSheet.create({
     },
     container:{
         flex: 1,
-       
         backgroundColor: 'rgba(255, 255, 255, 0.4)',
          
     },
@@ -181,7 +171,7 @@ const styles=StyleSheet.create({
         fontSize:22,
         paddingRight:90,
         paddingBottom:20,
-        paddingTop:5,
+        paddingTop:80,
     },
    
 
@@ -190,81 +180,86 @@ const styles=StyleSheet.create({
         fontWeight:'bold',
         fontSize:15,
         paddingRight:155,
-        paddingBottom:20,
+        paddingBottom:5,
+        paddingTop:9,
 
     },
     brand:{
         fontWeight:'bold',
         fontSize:15,
         paddingRight:190,
-        paddingBottom:20,
+        paddingBottom:5,
+        paddingTop:9,
 
     },
     model:{
         fontWeight:'bold',
         fontSize:15,
         paddingRight:190,
-        paddingBottom:20,
+        paddingBottom:5,
+        paddingTop:9,
     },
     enginetype:{
         fontWeight:'bold',
         fontSize:15,
         paddingRight:155,
-        paddingBottom:20,
+        paddingBottom:5,
+        paddingTop:9,
     },
     mileagedriven:{
         fontWeight:'bold',
         fontSize:15,
         paddingRight:140,
-        paddingBottom:20,
+        paddingBottom:5,
+        paddingTop:9,
     },
     textinput1:{
-        height: 38.5,
+        height: 45,
         borderColor: '#1D2B78',
         width: '65%',
         borderWidth:1,
-        borderRadius:17,
+        borderRadius:25,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 10,
     },
     textinput2:{
-        height: 38.5,
+        height: 45,
         borderColor: '#1D2B78',
         width: '65%',
         borderWidth:1,
-        borderRadius:17,
+        borderRadius:25,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 10,
         
     },
     textinput3:{
-        height: 38.5,
+        height: 45,
         borderColor: '#1D2B78',
         width: '65%',
         borderWidth:1,
-        borderRadius:17,
+        borderRadius:25,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 10,
     },
     textinput4:{
-        height: 38.5,
+        height: 45,
         borderColor: '#1D2B78',
         width: '65%',
         borderWidth:1,
-        borderRadius:17,
+        borderRadius:25,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 10,
     },
     textinput5:{
-        height: 38.5,
+        height: 45,
         borderColor: '#1D2B78',
         width: '65%',
         borderWidth:1,
-        borderRadius:17,
+        borderRadius:25,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 10,

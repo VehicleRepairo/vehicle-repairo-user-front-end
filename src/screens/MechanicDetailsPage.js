@@ -113,7 +113,7 @@ const styles=StyleSheet.create({
         borderWidth:1,
         borderRadius:50,
         padding:11,
-        marginVertical: 40,
+        marginVertical: 30,
         alignItems: 'center',
         marginLeft:75,
         borderBottomWidth:4,
@@ -121,14 +121,16 @@ const styles=StyleSheet.create({
        
     },
     title:{
-        marginLeft:150,
+        marginLeft:155,
         fontSize:20,
+        marginVertical:80,
+        marginBottom:5,
 
     },
     title1:{
         marginLeft:155,
         fontSize:14,
-        paddingBottom:5,
+        marginBottom:1,
 
     },
     profilePicture:{
@@ -136,6 +138,8 @@ const styles=StyleSheet.create({
         borderRadius:200,
         width:150,
         height:150,
+       
+        
     },
     title2:{
         marginVertical:20,

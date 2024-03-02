@@ -35,7 +35,7 @@ function MainContainer() {
                 iconName = focused ? "person-circle" : "person-circle-outline";
               } 
 
-            // You can return any component that you like here!
+         
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}

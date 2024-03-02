@@ -65,6 +65,7 @@ const MechanicsPage = ({route}) => {
    return(
     <ScrollView>
     <View style={styles.container}>
+    <Text style={styles.title}>Mechanics</Text>
     {mechanicData.map((mechanicData,index)=>(
         <TouchableOpacity onPress={onMechanicPressed} style={styles.Button1}>
         <View key={index}>
@@ -111,8 +112,14 @@ const styles=StyleSheet.create({
     container:{
         backgroundColor:'white',
         padding:20,
-        
-      
+   
+    },
+    title:{
+        marginLeft:40,
+        marginVertical:60,
+        fontSize:24,
+        marginBottom:20,
+        fontWeight:'bold'
 
     },
     profilePicture:{

@@ -65,7 +65,7 @@ const styles=StyleSheet.create({
          borderWidth:1,
          borderRadius:50,
          padding:8.5,
-         marginVertical: 15,
+         marginVertical: 5,
          alignItems: 'center',
          marginLeft:55,
          borderBottomWidth:4,
@@ -94,7 +94,7 @@ const styles=StyleSheet.create({
         borderWidth:1,
         borderRadius:50,
         padding:8.5,
-        marginVertical: 5,
+        marginVertical: 20,
         alignItems: 'center',
         marginLeft:55,
         borderBottomWidth:4,
@@ -107,7 +107,7 @@ const styles=StyleSheet.create({
         borderRadius:200,
         width:170,
         height:170,
-        marginVertical:200,
+        marginVertical:240,
 
 
     },

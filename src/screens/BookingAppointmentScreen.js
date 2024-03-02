@@ -154,8 +154,10 @@ const styles=StyleSheet.create({
         fontWeight:'bold',
         fontSize:22,
         paddingRight:40,
-        paddingBottom:25,
+        paddingBottom:5,
         paddingTop:20,
+        marginTop:80,
+        
     },
    
 
