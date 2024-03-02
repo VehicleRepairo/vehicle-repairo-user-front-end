@@ -83,13 +83,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     
-    marginTop:80,
+    marginTop:43,
    
   },
   background: {
     flex: 1,
     resizeMode: 'cover', 
-    paddingTop:10,
     
 
     
