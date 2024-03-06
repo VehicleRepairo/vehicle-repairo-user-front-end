@@ -65,26 +65,23 @@ const styles=StyleSheet.create({
          borderWidth:1,
          borderRadius:50,
          padding:8.5,
-         marginVertical: 5,
          alignItems: 'center',
          marginLeft:55,
          borderBottomWidth:4,
-    borderColor:'#E2E2E2'
+        borderColor:'#E2E2E2',
+        marginBottom:10,
     },
     text1:{
         fontWeight: '200',
         color: '#1D2B78',
         fontSize:17,
-        
 
     },
     text2:{
         fontWeight: '200',
         color: '#1D2B78',
-        
         fontSize:17,
-        
-
+    
     },
     button2:{
         height:43,
@@ -98,16 +95,16 @@ const styles=StyleSheet.create({
         alignItems: 'center',
         marginLeft:55,
         borderBottomWidth:4,
-    borderColor:'#E2E2E2'
+        borderColor:'#E2E2E2',
+        marginTop:10,
     },
-    
 
     logo:{
         marginLeft:105,
         borderRadius:200,
         width:170,
         height:170,
-        marginVertical:240,
+        marginVertical:250,
 
 
     },

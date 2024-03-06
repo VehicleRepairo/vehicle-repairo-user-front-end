@@ -41,6 +41,10 @@ const MechanicDetailsPage = ({route}) => {
                 </Pressable>   
         )    
     }
+    const onRatePressed =() => {
+        navigation.navigate('Rate and Reviews')
+       }
+     
   
     return (
        <ScrollView>
@@ -83,6 +87,9 @@ const MechanicDetailsPage = ({route}) => {
        
 
           <CustomButton text ="Submit" onPress={onBookPressed} />
+          <TouchableOpacity onPress={onRatePressed} style={styles.button2}>
+        <Text style={styles.text1}>Rate Mechanics</Text></TouchableOpacity>
+
     </View>
     </ScrollView>
    
@@ -96,14 +103,11 @@ const MechanicDetailsPage = ({route}) => {
 
 const styles=StyleSheet.create({
     container:{
-       
         flex:1,
-        
-       
     },
+
     RatingsSection:{
         alignItems:'center',
-        
         marginRight:210,
     },
     button:{
@@ -113,17 +117,29 @@ const styles=StyleSheet.create({
         borderWidth:1,
         borderRadius:50,
         padding:11,
-        marginVertical: 30,
+        marginVertical: 25,
         alignItems: 'center',
         marginLeft:75,
         borderBottomWidth:4,
         borderColor:'#E2E2E2'
        
     },
+    button2:{
+        height:47,
+        borderColor:'#1D2B78',
+        width: '65%',
+        borderWidth:1,
+        borderRadius:55,
+        padding:10,
+        alignItems: 'center',
+        marginLeft:75,
+        borderBottomWidth:2,
+       
+    },
     title:{
         marginLeft:155,
         fontSize:20,
-        marginVertical:80,
+        marginVertical:60,
         marginBottom:5,
 
     },
@@ -168,6 +184,12 @@ const styles=StyleSheet.create({
         color: 'white',
         fontWeight:'bold',
         fontSize:15,
+    },
+    text1:{
+        color: '#1D2B78',
+     
+        fontSize:15,
+        
     },
 })
 

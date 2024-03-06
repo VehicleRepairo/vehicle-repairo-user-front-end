@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {View,Text, ImageBackground, StyleSheet,ScrollView,Pressable,TextInput} from 'react-native'
+import {View,Text, ImageBackground, StyleSheet,ScrollView,TouchableOpacity,TextInput} from 'react-native'
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -17,16 +17,10 @@ const BookingAppointmentScreen = () => {
     const [date,setdate]=useState('');
 
     const [time,settime]=useState('');
-    const CustomButton =({onPress},text) => {
-        return(
-            < Pressable onPress={onPress} style={styles.button}>
-                <Text style={styles.text}>Submit</Text>
-                </Pressable>   
-        )    
-    }
+   
 
     const onSubmitPressed =() => {
-       navigation.navigate('Tracker')
+       navigation.navigate('TabNav')
       }
     
 
@@ -72,10 +66,10 @@ const BookingAppointmentScreen = () => {
 
 
            <Text 
-           style={styles.vehicletype}> Vehicle Type</Text>         
+           style={styles.vehicletype}> Vehicle and Type</Text>         
             <TextInput 
             style={styles.textinput4}
-            placeholder='Enter your vehicle type'
+            placeholder='Enter your vehicle and type'
             multiline={true}
             value={vehicletype}
             onChangeText={(text)=> setvehicletype(text)}
@@ -107,8 +101,9 @@ const BookingAppointmentScreen = () => {
             />
 </View>
 
-            <CustomButton text ="Submit" onPress={onSubmitPressed}/>
-           
+        <TouchableOpacity onPress={onSubmitPressed} style={styles.button1}>
+        <Text style={styles.text}>Submit</Text></TouchableOpacity>
+       
             </ImageBackground>
         </View>
      
@@ -126,20 +121,21 @@ const styles=StyleSheet.create({
         height: '100%',
     },
    
-    button:{
+    button1:{
         height:52,
         backgroundColor:'#1D2B78',
-        width: '59%',
+        width: '60%',
         borderWidth:1,
         borderRadius:55,
         padding:12,
-        marginVertical: 40,
         alignItems: 'center',
-        marginLeft:70,
+        marginLeft:75,
         borderBottomWidth:4,
-    borderColor:'#E2E2E2'
-        
+        borderColor:'#E2E2E2',
+        marginVertical:40,
+       
     },
+   
     text:{
         fontWeight: 'bold',
         color: 'white',
@@ -147,12 +143,13 @@ const styles=StyleSheet.create({
         fontSize:15,
         
     },
+    
 
     title:{
-        marginLeft:60,
+        marginLeft:75,
         color:'black',
         fontWeight:'bold',
-        fontSize:22,
+        fontSize:24,
         paddingRight:40,
         paddingBottom:5,
         paddingTop:20,
@@ -191,65 +188,58 @@ const styles=StyleSheet.create({
    date:{
         fontWeight:'bold',
         fontSize:15,
-        marginLeft:110,
-        
-        
+        marginLeft:100,
+
     },
    time:{
         fontWeight:'bold',
         fontSize:15,
-        marginLeft:110,
-        
-        
-        
-        
+        marginLeft:125,
+  
     },
-
     textinput1:{
         height: 47,
-        borderRadius:24,
+        borderRadius:26,
         borderColor: '#1D2B78',
-        width: '63%',
+        width: '68%',
         borderWidth:1,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 10,
-        marginLeft:70
+        marginLeft:60
     },
     textinput2:{
         height: 47,
         borderColor: '#1D2B78',
-        width: '63%',
+        width: '68%',
         borderWidth:1,
-        borderRadius:24,
+        borderRadius:26,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 12,
-        marginLeft:70
+        marginLeft:60
     },
     textinput3:{
         height: 47,
         borderColor: '#1D2B78',
-        width: '63%',
+        width: '68%',
         borderWidth:1,
-        borderRadius:24,
+        borderRadius:26,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 12,
-        marginLeft:70
+        marginLeft:60
     },
     textinput4:{
         height: 47,
         borderColor: '#1D2B78',
-        width: '63%',
+        width: '68%',
         borderWidth:1,
-        borderRadius:24,
+        borderRadius:26,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 12,
-        marginLeft:70,
-        flexDirection:'row'
-
+        marginLeft:60,
     },
     textinput5:{
         height: 47,
@@ -260,18 +250,17 @@ const styles=StyleSheet.create({
         paddingHorizontal:18,
         padding:8.5,
         marginVertical: 10,
-       marginLeft:70,
-        
-        
+       marginLeft:60,
+  
     },
     textinput6:{
         height: 47,
         borderColor: '#1D2B78',
-        width: '19%',
+        width: '24%',
         borderWidth:1,
         borderRadius:24,
-        paddingHorizontal:19,
-     marginLeft:40,
+        paddingHorizontal:29,
+     marginLeft:48,
         marginVertical: 10,
       
     },

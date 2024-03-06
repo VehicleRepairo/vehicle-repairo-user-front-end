@@ -34,11 +34,11 @@ const AddVehicleDetailsScreen = () => {
     }
     
     const onSubmitPressed =() => {
-        navigation.navigate('Home')
+        navigation.navigate('TabNav')
       }
    
     return(
-        
+        <ScrollView>
         <View style={styles.container}>
 
         <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg.png')} style={styles.background}>
@@ -115,13 +115,9 @@ const AddVehicleDetailsScreen = () => {
        <CustomButton text ="Submit" onPress={onSubmitPressed} />
        </ImageBackground>
    </View>
-   
-  
-
+   </ScrollView>
+ 
 );
-
-    
-       
     }
     
     

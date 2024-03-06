@@ -19,7 +19,7 @@ const RatingAndReviewScreen = () =>{
     }
     const onSubmitPressed =() => {
         
-        navigation.navigate('Profile');
+        navigation.navigate('Start Page');
       }
 
 
