@@ -4,25 +4,35 @@ import { View, TextInput, FlatList, Text } from 'react-native';
 const ServiceScreen = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState(null); // State to hold error
 
   const handleSearch = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/search', {
+      const response = await fetch('http://192.168.8.238:8000/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ word_to_find: searchText }), // Updated key to match backend
+        body: JSON.stringify({ searchText }), // Sending searchText as per Flask backend
       });
       const data = await response.json();
-      setSearchResults(data);
+      if (data.results.length === 0) {
+        setError("No results found");
+      } else {
+        setSearchResults(data.results);
+        setError(null); // Clear error if results are found
+      }
     } catch (error) {
       console.error('Error searching:', error);
+      setError("An error occurred while searching"); // Set error if fetch fails
     }
   };
 
   const renderItem = ({ item }) => (
-    <Text>{item.name}</Text>
+    <View style={{ marginVertical: 10, marginHorizontal: 20 }}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{item.problem}</Text>
+      <Text style={{ marginTop: 5 }}>{item.guideline}</Text>
+    </View>
   );
 
   return (
@@ -34,11 +44,15 @@ const ServiceScreen = ({ navigation }) => {
         value={searchText}
         onSubmitEditing={handleSearch}
       />
-      <FlatList
-        data={searchResults}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-      />
+      {error ? (
+        <Text style={{ textAlign: 'center', marginTop: 20 }}>{error}</Text>
+      ) : (
+        <FlatList
+          data={searchResults}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      )}
     </View>
   );
 };
