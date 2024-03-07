@@ -13,7 +13,7 @@ const ServiceScreen = ({ navigation }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ searchText }), // Sending searchText as per Flask backend
+        body: JSON.stringify({ searchText }), 
       });
       const data = await response.json();
       if (data.results.length === 0) {
