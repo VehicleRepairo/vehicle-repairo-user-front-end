@@ -15,7 +15,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import MechanicsPage from './screens/MechanicsPage';
 import MechanicDetailsPage from './screens/MechanicDetailsPage';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import EditProfileScreen from './screens/EditProfileScreen';
+
 
 const Tab = createBottomTabNavigator();
 const Stack=createStackNavigator();
@@ -66,7 +66,7 @@ const MainContainer=()=>(
       <Stack.Screen name='Mechanic Details' component={MechanicDetailsPage} />
       <Stack.Screen name='Book an Appointment' component={BookingAppointmentScreen} />
       <Stack.Screen name='Rate and Reviews' component={RatingAndReviewScreen} />
-      <Stack.Screen name="Edit" component={EditProfileScreen}/>
+  
       <Stack.Screen name='TabNav' component={TabNavigator} />
       </Stack.Navigator>
   </NavigationContainer>
