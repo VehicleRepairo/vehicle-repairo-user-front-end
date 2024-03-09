@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View,TouchableOpacity,StyleSheet,ScrollView,Image} from "react-native"
+import { Text, View,TouchableOpacity,StyleSheet,ScrollView,Image,ImageBackground} from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import StarRating from "react-native-star-rating";
 
@@ -65,6 +65,8 @@ const MechanicsPage = ({route}) => {
    return(
     <ScrollView>
     <View style={styles.container}>
+    <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg5.png')} style={styles.background}>
+
     <Text style={styles.title}>Mechanics</Text>
     {mechanicData.map((mechanicData,index)=>(
         <TouchableOpacity onPress={onMechanicPressed} style={styles.Button1}>
@@ -101,7 +103,7 @@ const MechanicsPage = ({route}) => {
     )
     }
 
-      
+        </ImageBackground>
         </View>
         </ScrollView>
    
@@ -111,9 +113,15 @@ const MechanicsPage = ({route}) => {
 const styles=StyleSheet.create({
     container:{
         backgroundColor:'white',
-        padding:20,
+ 
    
     },
+    background:{
+        width: '100%',
+        height: '100%',
+   
+      },
+
     title:{
         marginLeft:40,
         marginVertical:60,
@@ -144,10 +152,10 @@ const styles=StyleSheet.create({
     borderBottomWidth:4,
     backgroundColor:'white',
     height:140,
-    width: '90%',
+    width: '80%',
     borderWidth:1,
     marginVertical:10,
-    marginLeft:10,
+    marginLeft:35,
     
     
     

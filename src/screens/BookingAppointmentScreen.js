@@ -25,7 +25,7 @@ const BookingAppointmentScreen = () => {
     
 
     return(
-
+<ScrollView>
             <View style={styles.container}>
             
              <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg3.png')} style={styles.background}>
@@ -106,6 +106,7 @@ const BookingAppointmentScreen = () => {
        
             </ImageBackground>
         </View>
+        </ScrollView>
      
     
     );
@@ -119,6 +120,7 @@ const styles=StyleSheet.create({
     background:{
         width: '100%',
         height: '100%',
+        marginBottom:150,
     },
    
     button1:{
@@ -133,18 +135,15 @@ const styles=StyleSheet.create({
         borderBottomWidth:4,
         borderColor:'#E2E2E2',
         marginVertical:40,
-       
-    },
+       },
    
     text:{
         fontWeight: 'bold',
         color: 'white',
         fontWeight:'bold',
-        fontSize:15,
-        
+        fontSize:15,    
     },
     
-
     title:{
         marginLeft:75,
         color:'black',
@@ -153,11 +152,9 @@ const styles=StyleSheet.create({
         paddingRight:40,
         paddingBottom:5,
         paddingTop:20,
-        marginTop:80,
-        
+        marginTop:80,   
     },
-   
-
+ 
    name:{
     paddingTop:23,
     marginLeft:60,

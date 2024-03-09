@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Text, View,TouchableOpacity,StyleSheet,Pressable,Image,ScrollView} from "react-native"
+import { Text, View,TouchableOpacity,StyleSheet,Pressable,Image,ScrollView,ImageBackground} from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import StarRating from "react-native-star-rating";
 
@@ -48,6 +48,8 @@ const MechanicDetailsPage = ({route}) => {
   
     return (
        <ScrollView>
+               <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg5.png')} style={styles.background}>
+
         <View style={styles.container}>
             <Text style={styles.title}> {mechanicName || 'Username'} </Text>
             <Text></Text>
@@ -89,8 +91,9 @@ const MechanicDetailsPage = ({route}) => {
           <CustomButton text ="Submit" onPress={onBookPressed} />
           <TouchableOpacity onPress={onRatePressed} style={styles.button2}>
         <Text style={styles.text1}>Rate Mechanics</Text></TouchableOpacity>
-
+    
     </View>
+    </ImageBackground>
     </ScrollView>
    
 
@@ -110,8 +113,14 @@ const styles=StyleSheet.create({
         alignItems:'center',
         marginRight:210,
     },
+    background:{
+        width: '100%',
+        height: '100%',
+        marginBottom:300,
+  
+      },
     button:{
-        height:52,
+        height:48,
         backgroundColor:'#1D2B78',
         width: '65%',
         borderWidth:1,
@@ -120,8 +129,7 @@ const styles=StyleSheet.create({
         marginVertical: 25,
         alignItems: 'center',
         marginLeft:75,
-        borderBottomWidth:4,
-        borderColor:'#E2E2E2'
+     
        
     },
     button2:{
