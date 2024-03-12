@@ -1,270 +1,165 @@
 import React, { useState } from "react";
-import {View,Text, ImageBackground, StyleSheet,ScrollView,Pressable,TextInput} from 'react-native'
+import { ScrollView, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-
+import useAuthStore from '../store/authStore';
+import { Alert } from 'react-native';
 
 
 const AddVehicleDetailsScreen = () => {
-   
-    
-    const navigation=useNavigation();
-    
-    
-    const [vehicletype,setvehicletype]= useState('');
+    const navigation = useNavigation();
+    const { user } = useAuthStore.getState();
+    const firebase_uid = user ? user.uid : '';
 
-    const [brand,setbrand]= useState('');
+    const [vehicle_type, setVehicletype] = useState('');
+    const [Brand, setBrand] = useState('');
+    const [Model, setModel] = useState('');
+    const [ Engine_type, setEnginetype] = useState('');
+    const [mileage, setMileagedriven] = useState('');
 
-    const [model,setmodel]=useState('');
-    
-    const [enginetype,setenginetype]=useState('');
-
-    const [mileagedriven,setmileagedriven]=useState('');
-
-   
-
-
-
-    const CustomButton =({onPress},text) => {
-        return(
-            < Pressable onPress={onPress} style={styles.button}
-            >
-                <Text style={styles.text}>Submit</Text>
-                </Pressable>   
-        )    
-    }
-    
-    const onSubmitPressed =() => {
-        navigation.navigate('Home')
-      }
-   
-    return(
+    const onSubmitPressed = () => {
+        // Gather all the input values
+        const formData = {
+            vehicle_type,
+            Brand,
+            Model,
+            Engine_type,
+            mileage,
+            firebase_uid 
+        };
         
-        <View style={styles.container}>
-
-        <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg.png')} style={styles.background}>
-      <Text 
-      style={styles.title}>Add Vehicle Details </Text>
-       
-
-      
-      <Text 
-      style={styles.vehicletype}
-      > Vehicle Type</Text>
-
-       <TextInput 
-       style={styles.textinput1}
-       placeholder='Enter your Vehicle type' 
-       multiline={true}
-       value={vehicletype}
-       onChangeText={(text)=> setvehicletype(text)}
-       />
-
-       <Text 
-       style={styles.brand}
-       > Brand</Text>     
-
-        <TextInput 
-       style={styles.textinput2}
-       placeholder='Enter your vehicle brand'
-       multiline={true}
-       value={brand}
-       onChangeText={(text)=> setbrand(text)}
-       />
+        fetch(`http://192.168.1.4:8000/vehicle`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => {
+            if (response.ok) {
+                Alert.alert(
+                    "Success",
+                    "Vehicle details added successfully!",
+                    "Please make sure to go and create your profile"
+                    [{ text: "OK", onPress: () => navigation.navigate('TabNav') }]
+                );
+            } else {
+                throw new Error('Failed to add vehicle details'+Error);
+                print(firebase_uid)
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
            
+        });
+    };
 
-        <Text 
-      style={styles.model}
-      > Model</Text>         
-      
-       <TextInput 
-       style={styles.textinput3}
-       placeholder='Enter your vehicle model' 
-       multiline={true}
-       value={model}
-       onChangeText={(text)=> setmodel(text)}
-       />
-           
+    return (
+        <ScrollView style={styles.container}>
+            <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg.png')} style={styles.background}>
+                <Text style={styles.title}>Add Vehicle Details</Text>
 
-      <Text 
-      style={styles.enginetype}
-       > Engine Type</Text> 
+                <Text style={styles.label}>Vehicle Type</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter your Vehicle type'
+                    value={vehicle_type}
+                    onChangeText={text => setVehicletype(text)}
+                />
 
-   
-       <TextInput 
-       style={styles.textinput4}
-       placeholder='Enter your engine type' 
-       multiline={true}
-       value={enginetype}
-       onChangeText={(text)=> setenginetype(text)}
-       />
-           
-       <Text 
-      style={styles.mileagedriven}
-      
-      > Mileage Driven</Text> 
+                <Text style={styles.label}>Brand</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter your vehicle brand'
+                    value={Brand}
+                    onChangeText={text => setBrand(text)}
+                />
 
-       <TextInput 
-       style={styles.textinput5}
-       placeholder='Enter your mileage driven' 
-       multiline={true}
-       value={mileagedriven}
-       onChangeText={(text)=> setmileagedriven(text)}
-       />
-           
+                <Text style={styles.label}>Model</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter your vehicle model'
+                    value={Model}
+                    onChangeText={text => setModel(text)}
+                />
 
-       <CustomButton text ="Submit" onPress={onSubmitPressed} />
-       </ImageBackground>
-   </View>
-   
-  
+                <Text style={styles.label}>Engine Type</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter your engine type'
+                    value={Engine_type}
+                    onChangeText={text => setEnginetype(text)}
+                />
 
-);
+                <Text style={styles.label}>Mileage Driven</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter your mileage driven'
+                    value={mileage}
+                    onChangeText={text => setMileagedriven(text)}
+                />
 
-    
-       
-    }
-    
-    
-const styles=StyleSheet.create({
+                <Pressable onPress={onSubmitPressed} style={styles.button}>
+                    <Text style={styles.buttonText}>Submit</Text>
+                </Pressable>
+            </ImageBackground>
+        </ScrollView>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    },
     background: {
         flex: 1,
         width: '100%',
         height: '100%',
-        resizeMode: 'cover', 
+        resizeMode: 'cover',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop:5,
-
-        
-      },
-    button:{
-        height:48,
-        backgroundColor:'#1D2B78',
-        width: '65%',
-        borderWidth:1,
-        borderRadius:50,
-        padding:9,
-        marginVertical: 70,
-        alignItems: 'center',
-        borderBottomWidth:4,
-    borderColor:'#E2E2E2'
-        
-        
-        
+        paddingTop: 5,
     },
-    text:{
+    button: {
+        height: 48,
+        backgroundColor: '#1D2B78',
+        width: '65%',
+        borderWidth: 1,
+        borderRadius: 50,
+        padding: 9,
+        marginVertical: 20,
+        alignItems: 'center',
+    },
+    buttonText: {
         fontWeight: 'bold',
         color: 'white',
-        fontWeight:'bold',
-        fontSize:15,
+        fontSize: 15,
     },
-    container:{
-        flex: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
-         
+    label: {
+        fontWeight: 'bold',
+        fontSize: 15,
+        paddingBottom: 5,
+        paddingTop: 9,
     },
-
-    title:{
-        marginBottom:1,
-        color:'black',
-        fontWeight:'bold',
-        fontSize:22,
-        paddingRight:90,
-        paddingBottom:20,
-        paddingTop:80,
-    },
-   
-
-    vehicletype:{
-        
-        fontWeight:'bold',
-        fontSize:15,
-        paddingRight:155,
-        paddingBottom:5,
-        paddingTop:9,
-
-    },
-    brand:{
-        fontWeight:'bold',
-        fontSize:15,
-        paddingRight:190,
-        paddingBottom:5,
-        paddingTop:9,
-
-    },
-    model:{
-        fontWeight:'bold',
-        fontSize:15,
-        paddingRight:190,
-        paddingBottom:5,
-        paddingTop:9,
-    },
-    enginetype:{
-        fontWeight:'bold',
-        fontSize:15,
-        paddingRight:155,
-        paddingBottom:5,
-        paddingTop:9,
-    },
-    mileagedriven:{
-        fontWeight:'bold',
-        fontSize:15,
-        paddingRight:140,
-        paddingBottom:5,
-        paddingTop:9,
-    },
-    textinput1:{
+    input: {
         height: 45,
         borderColor: '#1D2B78',
         width: '65%',
-        borderWidth:1,
-        borderRadius:25,
-        paddingHorizontal:20,
-        padding:8.5,
+        borderWidth: 1,
+        borderRadius: 25,
+        paddingHorizontal: 20,
+        padding: 8.5,
         marginVertical: 10,
     },
-    textinput2:{
-        height: 45,
-        borderColor: '#1D2B78',
-        width: '65%',
-        borderWidth:1,
-        borderRadius:25,
-        paddingHorizontal:20,
-        padding:8.5,
-        marginVertical: 10,
-        
+    title: {
+        marginBottom: 1,
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 22,
+        paddingRight: 90,
+        paddingBottom: 20,
+        paddingTop: 80,
     },
-    textinput3:{
-        height: 45,
-        borderColor: '#1D2B78',
-        width: '65%',
-        borderWidth:1,
-        borderRadius:25,
-        paddingHorizontal:20,
-        padding:8.5,
-        marginVertical: 10,
-    },
-    textinput4:{
-        height: 45,
-        borderColor: '#1D2B78',
-        width: '65%',
-        borderWidth:1,
-        borderRadius:25,
-        paddingHorizontal:20,
-        padding:8.5,
-        marginVertical: 10,
-    },
-    textinput5:{
-        height: 45,
-        borderColor: '#1D2B78',
-        width: '65%',
-        borderWidth:1,
-        borderRadius:25,
-        paddingHorizontal:20,
-        padding:8.5,
-        marginVertical: 10,
-    },
-
-})
+});
 
 export default AddVehicleDetailsScreen;

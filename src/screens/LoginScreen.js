@@ -2,25 +2,43 @@ import React, { useState } from "react";
 import {View,Text, Image, StyleSheet,useWindowDimensions,ScrollView,TouchableOpacity,TextInput} from 'react-native'
 import login from '../../assets/Images/Sdgp_Images/login.jpg'
 import { useNavigation } from "@react-navigation/native";
-
+import { FIREBASE_AUTH } from "../../firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import useAuthStore from '../store/authStore';
 
 
 const LoginScreen = () => {
     const navigation=useNavigation();
     
-    const [name,setname]= useState('');
+    const auth = FIREBASE_AUTH; 
+  
+
+    const [email,setemail]= useState('');
 
     const [password,setpassword]= useState('');
 
     const {height} = useWindowDimensions();
-  
-    const onLoginPressed =() =>{
-        navigation.navigate('Add Vehicle Details')
 
-    }
+    
+    const [loading,setloading]= useState('');
+  
     const onSignupPressed=()=> {
         navigation.navigate('Signup')
     }
+    const logIn = async ()=>{
+        setloading(true);
+        try{
+            const response = await signInWithEmailAndPassword(auth,email,password);
+            useAuthStore.setState({ user: response.user });
+            navigation.navigate('TabNav')
+        }catch(error){
+            console.log(error);
+            alert('Login failed.')
+        }finally{
+            setloading(false);
+        }
+    }
+
 
     
       
@@ -37,13 +55,13 @@ const LoginScreen = () => {
         style={styles.LoginTopic}>Login </Text>
 
         <Text 
-        style={styles.username}> Username or email address</Text>
+        style={styles.username}> Email address</Text>
         <TextInput 
         style={styles.textinput1}
-        placeholder='name/ email address' 
+        placeholder='Email address' 
         multiline={true}
-        value={name}
-        onChangeText={(text)=> setname(text)}
+        value={email}
+        onChangeText={(text)=> setemail(text)}
          />
         
 
@@ -55,13 +73,14 @@ const LoginScreen = () => {
 
         <TextInput 
         style={styles.textinput2}
-        placeholder='enter password' 
-        multiline={true}
+        placeholder='Password' 
         value={password}
         onChangeText={(text)=> setpassword(text)}
+        secureTextEntry={true}
+        
          />
          
-         <TouchableOpacity style={styles.button1} onPress={onLoginPressed}>
+         <TouchableOpacity style={styles.button1} onPress={logIn}>
              <Text style={styles.text1}>Login</Text>
          </TouchableOpacity>
          <Text>or</Text>
@@ -104,7 +123,7 @@ const styles=StyleSheet.create({
 
     },
     button1:{
-        height:45,
+        height:48,
         backgroundColor:'#1D2B78',
         width: '70%',
         borderWidth:1,
@@ -118,7 +137,7 @@ const styles=StyleSheet.create({
     },
     
     button2:{
-        height:40,
+        height:44,
        borderColor:"#1D2B78",
         width: '70%',
         borderWidth:1,
@@ -129,22 +148,22 @@ const styles=StyleSheet.create({
     },
      
     textinput1:{
-        height: 38.5,
+        height: 44,
         borderColor: '#1D2B78',
         width: '70%',
         borderWidth:1,
-        borderRadius:17,
+        borderRadius:30,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 10,
 
     },
     textinput2:{
-        height: 38.5,
+        height: 44,
         borderColor: '#1D2B78',
         width: '70%',
         borderWidth:1,
-        borderRadius:17,
+        borderRadius:30,
         paddingHorizontal:20,
         padding:8.5,
         marginVertical: 10,
@@ -162,13 +181,13 @@ const styles=StyleSheet.create({
         color:'#1D2B78',
         fontWeight:'bold',
         fontSize:23,
-        paddingRight:230,
+        paddingRight:200,
         marginVertical: 10,
     },
     username:{
         fontWeight:'bold',
         fontSize:15,
-        paddingRight:80,
+        marginEnd:160,
         
     },
     password:{

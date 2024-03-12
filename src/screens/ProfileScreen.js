@@ -1,195 +1,172 @@
-import React, { useEffect,useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
-import EditProfileScreen from './EditProfileScreen';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import useAuthStore from '../store/authStore';
 
-const Separator = () => <View style={styles.separator} />;
-
-const ProfileScreen = ({route}) => {
-  const navigation=useNavigation();
-
-  const [isEditing, setIsEditing] = useState(false);
+const ProfileScreen = () => {
+  const navigation = useNavigation();
+  const { user } = useAuthStore.getState();
+  const firebase_uid = user ? user.uid : '';
+  //const logout = useAuthStore(state => state.logout); 
+  const name = user ? user.email.split('@')[0] : '';
 
   const [userData, setUserData] = useState({
-    userName:'John Doe',
-    
-    profilePicture: require('../../assets/Images/Sdgp_Images/Mechanic_Profile.png'),
-    name: 'John Doe',
-    contact: '+94 xxxxxxxxx',
-    vehicle: 'Honda Vezel',
-    appointmentStatus: 'Scheduled',
-  });
+      profilePicture: require('../../assets/Images/Sdgp_Images/Mechanic_Profile.png'),
+      userName: 'John',
+      appointmentStatus: 'Scheduled',
+      vehicleServiceReminder: ''
+    });
 
-  
+  const [reload, setReload] = useState(false);
 
-  const onSaveProfilepressed = (updatedUserData) => {
-    setUserData(updatedUserData);
-    setIsEditing(false);
+  useEffect(() => {
+    setReload(false); // Reset reload state when component mounts
+  }, []);
+
+  const AppointmentStatus = () => {
+    const [appointmentStatus, setAppointmentStatus] = useState('');
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://192.168.1.4:8000/get_appointment_status/${firebase_uid}`);
+          if (!response.ok) {
+            throw new Error('No appointment status');
+          }
+          const data = await response.json();
+          setAppointmentStatus(data.appointment_status);
+        } catch (error) {
+          console.error('Error fetching appointment status:', error);
+        }
+      };
+
+      fetchData();
+    }, [reload]); // Reload when reload state changes
+
+    const deleteAppointmentStatus = async () => {
+      try {
+        const response = await fetch(`http://192.168.1.4:8000/delete_status/${firebase_uid}`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          throw new Error('Failed to delete appointment status');
+        }
+        // If deletion is successful, update the UI accordingly
+        setReload(true); // Set reload state to trigger reload
+      } catch (error) {
+        console.error('Error deleting appointment status:', error);
+      }
+    };
+
+    // Render appointment status and buttons if it exists
+    if (appointmentStatus) {
+      return (
+        <View>
+          <Text style={styles.label}>Appointment Status: {appointmentStatus}</Text>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={deleteAppointmentStatus}>
+              <Text style={styles.buttonText}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    } else {
+      return null;
+    }
   };
 
-  const onCancelEditpressed = () => {
-    setIsEditing(false);
+  const onLogoutPressed = async () => {
+    useAuthStore.logout(); // Call the logout function from useAuthStore
+    navigation.navigate('Start Page');
   };
-
-  const onLogoutPressed = () => {
-  navigation.navigate('Start Page')
-  };
-  const onEditButtonPressed = () => {
-    setIsEditing(true);
-  };
-
-  
-  
-
-  ;
-
-  
-
 
   return (
     <ScrollView>
-    <View style={styles.container}>
-   
-     
-      <Text style={styles.title}> {userData.userName} </Text>
+      <View style={styles.container}>
+        <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg5.jpg')} style={styles.background}>
+          <Text style={styles.title}>Account Info </Text>
+          <Image source={userData.profilePicture} style={styles.profilePicture} />
+          <Text style={styles.title1}>Basic Info </Text>
 
-        <Text></Text>
-      <Image source={userData.profilePicture} style={styles.profilePicture} />
-      
+          <Text style={styles.label}>Username: {name}</Text>
+          <AppointmentStatus />
+          <Text style={styles.label}>Vehicle Service Reminder: {userData.vehicleServiceReminder}</Text>
+
+          <TouchableOpacity onPress={onLogoutPressed} style={styles.logoutButton}>
+            <Text style={styles.text}>Logout</Text>
+          </TouchableOpacity>
+        </ImageBackground>
       </View>
-      <Text></Text>
-      <Text style={styles.title1}>PROFILE PHOTO</Text>
-     <Separator/>
-
-     
-        <Text style={styles.label}>Name </Text>
-        <Text style={styles.label2}> {userData.name}</Text>
-        <Text style={styles.label}>Contact </Text>
-        <Text style={styles.label2}>{userData.contact}</Text>
-        <Text style={styles.label}>Vehicle </Text>
-        <Text style={styles.label2}>{userData.vehicle}</Text>
-        <Text style={styles.label}>Appointment Status </Text>
-        <Text style={styles.label2}>{userData.appointmentStatus}</Text>
-
-        <View style={{flexDirection:'row'}}> 
-        <TouchableOpacity onPress={onLogoutPressed} style={styles.logoutButton}>
-        <Text style={styles.text1}>Logout</Text></TouchableOpacity>
-        <TouchableOpacity onPress={onEditButtonPressed} style={styles.editButton}>
-        <Text style={styles.editText}>Edit</Text></TouchableOpacity>
-</View>
-       
-      
-       
-        
-   
-
-      {isEditing && (
-        <EditProfileScreen
-          userData={userData}
-          onSave={onSaveProfilepressed}
-          onCancel={onCancelEditpressed}
-        />
-         
-      )}
-  
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    
-},
- 
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: '#737373',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  title:{
-    marginLeft:158,
-    fontSize:20,
-    marginTop:90
-
+  background: {
+    width: '100%',
+    height: '100%',
+    marginBottom: 300,
   },
   profilePicture: {
-    marginLeft:135,
-        borderRadius:200,
-        width:130,
-        height:130,
-    
+    marginLeft: 55,
+    borderRadius: 200,
+    width: 110,
+    height: 110,
+    marginVertical: 8
   },
-  title1:{
-    marginLeft:155,
-    fontSize:14,
-
-},
-  
- 
+  title: {
+    marginLeft: 60,
+    fontSize: 26,
+    marginTop: 130,
+    marginVertical: 10
+  },
+  title1: {
+    marginLeft: 55,
+    fontSize: 22,
+    marginVertical: 8
+  },
   label: {
-    marginVertical:4,
+    marginVertical: 8,
     fontSize: 16,
     marginBottom: 10,
-    marginLeft:55,
-    fontWeight:'900'
-
+    marginLeft: 55,
+    fontWeight: '500'
   },
-  label2:{
-    fontSize: 16,
-    marginBottom: 10,
-    marginLeft:55,
-    marginVertical:4,
-    
-  },
-  editButton:{
-    height: 47,
-    borderColor: 'black',
-    width: '35%',
-    borderWidth:1,
-    borderRadius:24,
-    paddingHorizontal:20,
-    padding:8.5,
-    marginVertical: 30,
-    marginLeft:30
-
-  
-  },
-  logoutButton:{
-    height: 47,
+  logoutButton: {
+    height: 50,
     backgroundColor: '#1D2B78',
-    width: '35%',
-    borderWidth:1,
-    borderRadius:24,
-    paddingHorizontal:20,
-    padding:8.5,
+    width: '38%',
+    borderWidth: 1,
+    borderRadius: 50,
+    paddingHorizontal: 29,
+    padding: 10,
     marginVertical: 30,
-    marginLeft:40
-
+    marginLeft: 45,
+    borderColor: '#1D2B78',
   },
-  editText:{
-    fontWeight:'bold',
-    fontSize:15,
-    marginLeft:34,
-    paddingVertical:2.5
-    
-    
-
-
+  text: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginLeft: 25,
+    paddingVertical: 2.5,
+    color: 'white'
   },
-
-  text1:{
-    fontWeight:'bold',
-    fontSize:15,
-    marginLeft:25,
-    paddingVertical:2.5,
-    color:'white'
-    
-    
-    
-
+  buttonContainer: {
+    flexDirection: 'row',
+    gap:10,
+    marginVertical: 10,
+    marginLeft: 55
   },
-  
+  button: {
+    backgroundColor: '#800000',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold'
+  }
 });
 
 export default ProfileScreen;

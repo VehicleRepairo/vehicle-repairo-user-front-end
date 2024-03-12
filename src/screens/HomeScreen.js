@@ -1,76 +1,83 @@
 import React, { useEffect, useState } from 'react';
-import RNPickerSelect from 'react-native-picker-select';
+import useAuthStore from '../store/authStore';
 import { Text, View, StyleSheet,ImageBackground ,TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import * as Location from 'expo-location';
 
 const HomeScreen = ({route}) => {
+      
+    const { user } = useAuthStore.getState();
+    const name = user ? user.email.split('@')[0] : '';
+
     const navigation=useNavigation();
     
-    const onVehicleServicePressed =() =>{
-        navigation.navigate('Mechanics')
-    }
+    const sendDataToBackendAndNavigate = async (selectedValue) => {
+      try {
+          // Request permission to access the user's location
+          const { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+              throw new Error('Permission to access location was denied');
+          }
 
-    const onVehicleInspectionPressed=()=>{
-        
-        navigation.navigate('Mechanics')
+          // Get user's current location
+          const location = await Location.getCurrentPositionAsync({});
+          const { latitude, longitude } = location.coords;
 
-    }
+          // Send data to the backend
+          const response = await fetch('http://192.168.1.4:8000/nearest_mechanics', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  selectedValue,
+                  location: {
+                      latitude,
+                      longitude
+                  }
+              })
+          });
 
-    const onTyreRepairPressed=()=>{
-        navigation.navigate('Mechanics')
-    }
+          if (!response.ok) {
+              throw new Error('Failed to fetch data from the server');
+          }
 
-    const onVehicleWashPressed=() =>{
-        navigation.navigate('Mechanics')
-    }
+          // Parse the response as JSON
+          const responseData = await response.json();
+          console.log(responseData)
 
-  const [selectedValue, setSelectedValue] = useState('option1');
+          // Navigate to a new screen and pass the response data as a parameter
+          navigation.navigate('Mechanics', { responseData: responseData });
+          
+      } catch (error) {
+          console.error('Error:', error);
+          Alert.alert('Error', 'Failed to send data to the server');
+      }
+  };
 
-  const [userName,setUserName]=useState('');
-
-  useEffect(()=>{//The user's name is passed as a parameter when navigating from login page to home page
-    if (route.params && route.params.userName){
-        setUserName(route.params.userName);
-    }
-  },[route.paramas]);
 
   return (
     <View style={styles.container}>
      <ImageBackground source={require('../../assets/Images/Sdgp_Images/b1.png')} style={styles.background}>
      
-      <RNPickerSelect
-      style={styles.Dropdown}
-        onValueChange={(itemValue) => setSelectedValue(itemValue)}
-        items={[
-          { label: 'Option 1', value: 'option1' },
-          { label: 'Option 2', value: 'option2' },
-          { label: 'Option 3', value: 'option3' },
-          { label: 'Option 4', value: 'option4' },
-          { label: 'Option 5', value: 'option5' },
-          { label: 'Option 6', value: 'option6' },
-          { label: 'Option 7', value: 'option8' },
-          { label: 'Option 9', value: 'option9' },
-          { label: 'Option 10', value: 'option10' },
-        ]}
-        value={selectedValue}
-      />
+     
       <Text style={styles.Integer}>60000
       /
       10000</Text>
-      <Text style={styles.title}>Hello {userName || 'Username'} !</Text>
-      <TouchableOpacity style={styles.button1} onPress={onVehicleServicePressed}>
-             <Text style={styles.text1}>Vehicle Service</Text>
+      <Text style={styles.title}>Hello {name || 'Username'} !</Text>
+      <TouchableOpacity style={styles.button1}  onPress={() => sendDataToBackendAndNavigate('Vehicle Service')}>
+             <Text style={styles.text}>Vehicle Service</Text>
          </TouchableOpacity>
          
-         <TouchableOpacity style={styles.button2} onPress={onVehicleInspectionPressed}>
-             <Text style={styles.text2}>Vehicle Inspection</Text>
+         <TouchableOpacity style={styles.button2}  onPress={() => sendDataToBackendAndNavigate('Vehicle Inspection')}>
+             <Text style={styles.text}>Vehicle Inspection</Text>
          </TouchableOpacity>
-         <TouchableOpacity style={styles.button3} onPress={onTyreRepairPressed}>
-             <Text style={styles.text3}>Tyre Replacement, Repairs</Text>
+         <TouchableOpacity style={styles.button3} onPress={() => sendDataToBackendAndNavigate('Tyre Repairs')}>
+             <Text style={styles.text}>Tyre Repair</Text>
          </TouchableOpacity>
          
-         <TouchableOpacity style={styles.button4} onPress={onVehicleWashPressed}>
-             <Text style={styles.text4}>Vehicle Wash</Text>
+         <TouchableOpacity style={styles.button4} onPress={() => sendDataToBackendAndNavigate('Vehicle Wash')}>
+             <Text style={styles.text}>Vehicle Wash</Text>
          </TouchableOpacity>
       
       </ImageBackground>
@@ -83,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     
-    marginTop:43,
+    marginTop:41,
    
   },
   background: {
@@ -95,29 +102,28 @@ const styles = StyleSheet.create({
   },
  title:{
     fontSize:24,
-   paddingLeft:90,
+    paddingLeft:120,
     marginBottom:10,
     color:'black',
     paddingTop:1,
  },
  button1:{
-    height:50,
+  height:58,
     backgroundColor:'white',
     borderColor:'#E4E2E2',
     width: '65%',
-
      borderWidth:1,
      borderRadius:50,
      padding:12,
      marginVertical: 15,
      alignItems: 'center',
-     marginHorizontal:50,
+     marginHorizontal:65,
      marginVertical:25,
-     borderBottomWidth:4,
+     borderBottomWidth:3,
    
 },
 button2:{
-    height:50,
+  height:58,
     backgroundColor:'white',
     borderColor:'#E4E2E2',
     width: '65%',
@@ -126,13 +132,13 @@ button2:{
      padding:12,
      marginVertical: 15,
      alignItems: 'center',
-     marginHorizontal:50,
+     marginHorizontal:65,
      marginVertical:25,
-     borderBottomWidth:4,
+     borderBottomWidth:3,
     
 },
  button3:{
-    height:50,
+    height:58,
     backgroundColor:'white',
     borderColor:'#E4E2E2',
     width: '65%',
@@ -141,14 +147,14 @@ button2:{
      padding:12,
      marginVertical: 15,
      alignItems: 'center',
-     marginHorizontal:50,
+     marginHorizontal:65,
      marginVertical:25,
-     borderBottomWidth:4,
+     borderBottomWidth:3,
      
 
 }, 
 button4:{
-    height:50,
+  height:58,
     backgroundColor:'white',
     borderColor:'#E4E2E2',
      width: '65%',
@@ -157,23 +163,16 @@ button4:{
      padding:12,
      marginVertical: 15,
      alignItems: 'center',
-     marginHorizontal:50,
+     marginHorizontal:65,
      marginVertical:25,
-     borderBottomWidth:4,
+     borderBottomWidth:3,
     
 },
-text1:{
-    fontSize:16
+text:{
+    fontSize:17,
+    paddingVertical:3,
 },
-text2:{
-    fontSize:16
-},
-text3:{
-    fontSize:16
-},
-text4:{
-    fontSize:16
-},
+
 Integer:{
     backgroundColor:'#BFBFBF',
     fontSize:12,
@@ -186,6 +185,7 @@ Integer:{
     paddingHorizontal:15,
     padding:20,
     marginLeft:260,
+    marginVertical:35,
   
 },
 
