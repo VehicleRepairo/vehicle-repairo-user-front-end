@@ -101,6 +101,8 @@ const ProfileScreen = () => {
   );
 };
 
+
+
 const styles = StyleSheet.create({
   background: {
     width: '100%',
