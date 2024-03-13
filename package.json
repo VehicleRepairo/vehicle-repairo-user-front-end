@@ -1,6 +1,4 @@
 {
-
-  "name": "vehicle_repairo",
   "name": "vehicle_repairo_frontend",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
@@ -48,9 +46,6 @@
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
     "zustand": "^4.5.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.0"
   },
   "private": true
 }
