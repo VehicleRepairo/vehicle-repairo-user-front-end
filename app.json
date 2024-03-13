@@ -1,12 +1,7 @@
 {
   "expo": {
-<<<<<<< HEAD
-    "name": "vehicle_Repairo",
-    "slug": "vehicle_Repairo",
-=======
     "name": "vehicle_repairo_frontend",
     "slug": "vehicle_repairo_frontend",
->>>>>>> app-frontend
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
