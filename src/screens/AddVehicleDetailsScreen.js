@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { ScrollView, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
+import { Alert, ScrollView, View, Picker, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
-import { Alert } from 'react-native';
-
 
 const AddVehicleDetailsScreen = () => {
     const navigation = useNavigation();
@@ -11,23 +9,23 @@ const AddVehicleDetailsScreen = () => {
     const firebase_uid = user ? user.uid : '';
 
     const [vehicle_type, setVehicletype] = useState('');
-    const [Brand, setBrand] = useState('');
-    const [Model, setModel] = useState('');
-    const [ Engine_type, setEnginetype] = useState('');
+    const [brand, setBrand] = useState('');
+    const [model, setModel] = useState('');
+    const [engine_type, setEnginetype] = useState('');
     const [mileage, setMileagedriven] = useState('');
 
     const onSubmitPressed = () => {
         // Gather all the input values
         const formData = {
             vehicle_type,
-            Brand,
-            Model,
-            Engine_type,
+            brand,
+            model,
+            engine_type,
             mileage,
             firebase_uid 
         };
         
-        fetch(`http://192.168.1.5:8000/vehicle`, {
+        fetch(`http://192.168.1.124:8000/vehicle`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +68,7 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your vehicle brand'
-                    value={Brand}
+                    value={brand}
                     onChangeText={text => setBrand(text)}
                 />
 
@@ -78,7 +76,7 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your vehicle model'
-                    value={Model}
+                    value={model}
                     onChangeText={text => setModel(text)}
                 />
 
@@ -86,7 +84,7 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your engine type'
-                    value={Engine_type}
+                    value={engine_type}
                     onChangeText={text => setEnginetype(text)}
                 />
 

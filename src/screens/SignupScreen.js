@@ -58,7 +58,7 @@ const SignupScreen = () => {
 
           
              <Image
-            source={login}  style={[styles.Image,{height:height*0.5}]} resizeMode="contain"
+            source={login}  style={[styles.Image,{height:height*0.4}]} resizeMode="contain"
            /> 
 
            <Text 
