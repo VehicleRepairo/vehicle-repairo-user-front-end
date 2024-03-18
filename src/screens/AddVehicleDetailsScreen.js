@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, View, Picker, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
+import { SelectList } from "react-native-dropdown-select-list";
 
 const AddVehicleDetailsScreen = () => {
     const navigation = useNavigation();
@@ -13,6 +14,18 @@ const AddVehicleDetailsScreen = () => {
     const [model, setModel] = useState('');
     const [engine_type, setEnginetype] = useState('');
     const [mileage, setMileagedriven] = useState('');
+
+    const vehicles = [
+        {key:'Car', value:'Car'},
+        {key:'Bike', value:'Bike'},
+        {key:'Tuk', value:'Tuk'},
+    ];
+
+    const engine_types = [
+        {key:'Petrol', value:'Petrol'},
+        {key:'Diesel,', value:'Diesel'},
+        {key:'Electric', value:'Electric'},
+    ];
 
     const onSubmitPressed = () => {
         // Gather all the input values
@@ -57,16 +70,8 @@ const AddVehicleDetailsScreen = () => {
                 <Text style={styles.title}>Add Vehicle Details</Text>
 
                 <Text style={styles.label}>Vehicle Type</Text>
-                <Picker
-                    selectedValue={vehicle_type}  // Bind selectedValue to vehicle_type state
-                    style={styles.input}
-                    onValueChange={(itemValue, itemIndex) => setVehicletype(itemValue)}  // Update vehicle_type state on change
-                >
-                    <Picker.Item label="Select Vehicle Type" value="" />
-                    <Picker.Item label="Car" value="car" />
-                    <Picker.Item label="Bike" value="bike" />
-                    <Picker.Item label="Tuk" value="tuk" />
-                </Picker>
+                <SelectList boxStyles={styles.input} data={vehicles} setSelected={setVehicletype
+                } />
 
                 <Text style={styles.label}>Brand</Text>
                 <TextInput
@@ -85,12 +90,8 @@ const AddVehicleDetailsScreen = () => {
                 />
 
                 <Text style={styles.label}>Engine Type</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Enter your engine type'
-                    value={engine_type}
-                    onChangeText={text => setEnginetype(text)}
-                />
+                <SelectList boxStyles={styles.input} data={engine_types} setSelected={setEnginetype
+                } />
 
                 <Text style={styles.label}>Mileage Driven</Text>
                 <TextInput
