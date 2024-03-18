@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { ScrollView, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { Alert, ScrollView, View, Picker, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
-import { Alert } from 'react-native';
-
+import {Picker} from '@react-native-picker/picker'
 
 const AddVehicleDetailsScreen = () => {
     const navigation = useNavigation();
@@ -11,18 +10,18 @@ const AddVehicleDetailsScreen = () => {
     const firebase_uid = user ? user.uid : '';
 
     const [vehicle_type, setVehicletype] = useState('');
-    const [Brand, setBrand] = useState('');
-    const [Model, setModel] = useState('');
-    const [ Engine_type, setEnginetype] = useState('');
+    const [brand, setBrand] = useState('');
+    const [model, setModel] = useState('');
+    const [engine_type, setEnginetype] = useState('');
     const [mileage, setMileagedriven] = useState('');
 
     const onSubmitPressed = () => {
         // Gather all the input values
         const formData = {
             vehicle_type,
-            Brand,
-            Model,
-            Engine_type,
+            brand,
+            model,
+            engine_type,
             mileage,
             firebase_uid 
         };
@@ -59,18 +58,22 @@ const AddVehicleDetailsScreen = () => {
                 <Text style={styles.title}>Add Vehicle Details</Text>
 
                 <Text style={styles.label}>Vehicle Type</Text>
-                <TextInput
+                <Picker
+                    selectedValue={vehicle_type}  // Bind selectedValue to vehicle_type state
                     style={styles.input}
-                    placeholder='Enter your Vehicle type'
-                    value={vehicle_type}
-                    onChangeText={text => setVehicletype(text)}
-                />
+                    onValueChange={(itemValue, itemIndex) => setVehicletype(itemValue)}  // Update vehicle_type state on change
+                >
+                    <Picker.Item label="Select Vehicle Type" value="" />
+                    <Picker.Item label="Car" value="car" />
+                    <Picker.Item label="Bike" value="bike" />
+                    <Picker.Item label="Tuk" value="tuk" />
+                </Picker>
 
                 <Text style={styles.label}>Brand</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your vehicle brand'
-                    value={Brand}
+                    value={brand}
                     onChangeText={text => setBrand(text)}
                 />
 
@@ -78,7 +81,7 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your vehicle model'
-                    value={Model}
+                    value={model}
                     onChangeText={text => setModel(text)}
                 />
 
@@ -86,7 +89,7 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your engine type'
-                    value={Engine_type}
+                    value={engine_type}
                     onChangeText={text => setEnginetype(text)}
                 />
 
