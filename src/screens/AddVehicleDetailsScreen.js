@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, View, Picker, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
+import {Picker} from 'react-native-picker/picker'
 
 const AddVehicleDetailsScreen = () => {
     const navigation = useNavigation();
@@ -57,12 +58,16 @@ const AddVehicleDetailsScreen = () => {
                 <Text style={styles.title}>Add Vehicle Details</Text>
 
                 <Text style={styles.label}>Vehicle Type</Text>
-                <TextInput
+                <Picker
+                    selectedValue={vehicle_type}  // Bind selectedValue to vehicle_type state
                     style={styles.input}
-                    placeholder='Enter your Vehicle type'
-                    value={vehicle_type}
-                    onChangeText={text => setVehicletype(text)}
-                />
+                    onValueChange={(itemValue, itemIndex) => setVehicletype(itemValue)}  // Update vehicle_type state on change
+                >
+                    <Picker.Item label="Select Vehicle Type" value="" />
+                    <Picker.Item label="Car" value="car" />
+                    <Picker.Item label="Bike" value="bike" />
+                    <Picker.Item label="Tuk" value="tuk" />
+                </Picker>
 
                 <Text style={styles.label}>Brand</Text>
                 <TextInput
