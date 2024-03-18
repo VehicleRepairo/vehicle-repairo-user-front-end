@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, View, Picker, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
-import {Picker} from '@react-native-picker/picker'
+import { Alert } from 'react-native';
+
 
 const AddVehicleDetailsScreen = () => {
     const navigation = useNavigation();

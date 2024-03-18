@@ -9,7 +9,7 @@ const RatingAndReviewScreen = () => {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState('');
     const { mechanicUid } = route.params;
-    const backendEndpoint = "exp://192.168.1.124:8000/submit_review"; 
+    const backendEndpoint = "http://192.168.1.124:8000/submit_review"; 
 
     const CustomButton = ({ onPress }) => {
         return (

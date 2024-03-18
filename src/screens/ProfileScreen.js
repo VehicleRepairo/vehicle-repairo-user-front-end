@@ -45,7 +45,7 @@ const ProfileScreen = () => {
 
     const deleteAppointmentStatus = async () => {
       try {
-        const response = await fetch(`http://192.168.1.5:8000/delete_status/${firebase_uid}`, {
+        const response = await fetch(`http://192.168.1.124:8000/delete_status/${firebase_uid}`, {
           method: 'DELETE',
         });
         if (!response.ok) {

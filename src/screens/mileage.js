@@ -162,7 +162,7 @@ export default function Mileage(navigation) {
 
   const handlePress = async () => {
     try {
-      const req = await fetch("exp://192.168.1.124:8081/mileage/65awgvcydec", {
+      const req = await fetch("http://192.168.1.124:8000/mileage/65awgvcydec", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -176,7 +176,7 @@ export default function Mileage(navigation) {
   };
   const handlePress2 = async (newMileage) => {
     try {
-      const req = await fetch("exp://192.168.1.124:8081/vehicle/65awgvcydec", {
+      const req = await fetch("http://192.168.1.124:8000/vehicle/65awgvcydec", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
