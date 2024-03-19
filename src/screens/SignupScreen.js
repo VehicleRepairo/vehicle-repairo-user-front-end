@@ -54,6 +54,7 @@ const SignupScreen = () => {
              <View style={styles.container}>
 
           
+<<<<<<< HEAD
              <Image 
             style={{borderBottomRightRadius: 29,
             borderBottomLeftRadius: 25,
@@ -62,6 +63,11 @@ const SignupScreen = () => {
              }}
          source={require('../../assets/Images/Sdgp_Images/img5.png')} >
 </Image>
+=======
+             <Image
+            source={login}  style={[styles.Image,{height:height*0.4}]} resizeMode="contain"
+           /> 
+>>>>>>> 0db596d85d66f37b308d20bbcfee8fe9e6a39629
 
            <Text 
            style={styles.title}>Sign up </Text>

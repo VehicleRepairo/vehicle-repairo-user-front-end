@@ -46,6 +46,7 @@ const LoginScreen = () => {
         <ScrollView>
          <View style={styles.container}>
         
+<<<<<<< HEAD
          <Image 
          style={{borderBottomRightRadius: 40,
             borderBottomLeftRadius: 30,
@@ -54,6 +55,11 @@ const LoginScreen = () => {
          }}
          source={require('../../assets/Images/Sdgp_Images/img5.png')} >
 </Image>
+=======
+        <Image
+         source={login}  style={[styles.Image,{height:height*0.4}]} resizeMode="contain"
+        /> 
+>>>>>>> 0db596d85d66f37b308d20bbcfee8fe9e6a39629
 
         <Text 
         style={styles.LoginTopic}>Login </Text>
@@ -184,17 +190,25 @@ const styles=StyleSheet.create({
     username:{
         fontWeight:'bold',
         fontSize:15,
+<<<<<<< HEAD
         paddingRight:80,
         marginLeft:60,
         marginTop:10,
+=======
+        marginEnd:140,
+>>>>>>> 0db596d85d66f37b308d20bbcfee8fe9e6a39629
         
     },
     password:{
         fontWeight:'bold',
         fontSize:15,
+<<<<<<< HEAD
         paddingRight:180,
         marginLeft:60,
         marginTop:10,
+=======
+        paddingRight:170,
+>>>>>>> 0db596d85d66f37b308d20bbcfee8fe9e6a39629
         
     },
     
