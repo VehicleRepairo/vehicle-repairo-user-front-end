@@ -13,27 +13,15 @@ const AddVehicleDetailsScreen = () => {
     const [model, setModel] = useState('');
     const [engine_type, setEnginetype] = useState('');
     const [mileage, setMileagedriven] = useState('');
-    
 
-    const vehicles = [
-        {key:'Car', value:'Car'},
-        {key:'Bike', value:'Bike'},
-        {key:'Tuk', value:'Tuk'},
-    ];
-
-    const engine_types = [
-        {key:'Petrol', value:'Petrol'},
-        {key:'Diesel,', value:'Diesel'},
-        {key:'Electric', value:'Electric'},
-    ];
 
     const onSubmitPressed = () => {
         // Gather all the input values
         const formData = {
             vehicle_type,
-            Brand,
-            Model,
-            Engine_type,
+            brand,
+            model,
+            engine_type,
             mileage,
             firebase_uid 
         };
@@ -70,19 +58,18 @@ const AddVehicleDetailsScreen = () => {
                 <Text style={styles.title}>Add Vehicle Details</Text>
 
                 <Text style={styles.label}>Vehicle Type</Text>
-                <SelectList 
-                boxStyles={styles.input} 
-                dropdownStyles={styles.dropdownStyles} 
-                placeholder="Select vehicle type" 
-                data={vehicles} 
-                value={vehicle_type}
-                setSelected={text => setVehicletype(text)} />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter your vehicle brand'
+                    value={vehicle_type}
+                    onChangeText={text => setVehicletype(text)}
+                />
 
                 <Text style={styles.label}>Brand</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your vehicle brand'
-                    value={Brand}
+                    value={brand}
                     onChangeText={text => setBrand(text)}
                 />
 
@@ -90,7 +77,7 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your vehicle model'
-                    value={Model}
+                    value={model}
                     onChangeText={text => setModel(text)}
                 />
 
@@ -98,7 +85,7 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your engine type'
-                    value={Engine_type}
+                    value={engine_type}
                     onChangeText={text => setEnginetype(text)}
                 />
 
@@ -172,10 +159,7 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         paddingTop: 60,
     },
-    dropdownStyles: {
-        backgroundColor:'lightgray', 
-        maxHeight: 100
-    }
+
 });
 
 export default AddVehicleDetailsScreen;
