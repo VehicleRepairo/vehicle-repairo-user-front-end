@@ -48,7 +48,7 @@ const LoginScreen = () => {
          <View style={styles.container}>
         
         <Image
-         source={login}  style={[styles.Image,{height:height*0.4}]} resizeMode="contain"
+         source={login}  style={[styles.Image,{height:height*0.5}]} resizeMode="contain"
         /> 
 
         <Text 
@@ -187,13 +187,13 @@ const styles=StyleSheet.create({
     username:{
         fontWeight:'bold',
         fontSize:15,
-        marginEnd:140,
+        marginEnd:160,
         
     },
     password:{
         fontWeight:'bold',
         fontSize:15,
-        paddingRight:170,
+        paddingRight:180,
         
     },
     

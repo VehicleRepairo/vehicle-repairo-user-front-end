@@ -10,7 +10,11 @@ const MechanicDetailsPage = ({ route }) => {
 
   useEffect(() => {
     // Fetch additional details from the backend based on the mechanic details
+<<<<<<< HEAD
     fetch(`exp://192.168.1.124:8000/ratings/${mechanicDetails.mech_id}`)
+=======
+    fetch(`http://192.168.1.5:8000/ratings/${mechanicDetails.mech_id}`)
+>>>>>>> parent of 0db596d (user front end changes. model available vehcile images added)
       .then((response) => response.json())
       .then((data) => {
         setReviews(data);

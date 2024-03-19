@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, View, Picker, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
 import { SelectList } from "react-native-dropdown-select-list";
+=======
+import React, { useState } from "react";
+import { ScrollView, Text, ImageBackground, StyleSheet, Pressable, TextInput } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+import useAuthStore from '../store/authStore';
+import { Alert } from 'react-native';
+
+>>>>>>> parent of 0db596d (user front end changes. model available vehcile images added)
 
 const AddVehicleDetailsScreen = () => {
     const navigation = useNavigation();
@@ -10,9 +19,9 @@ const AddVehicleDetailsScreen = () => {
     const firebase_uid = user ? user.uid : '';
 
     const [vehicle_type, setVehicletype] = useState('');
-    const [brand, setBrand] = useState('');
-    const [model, setModel] = useState('');
-    const [engine_type, setEnginetype] = useState('');
+    const [Brand, setBrand] = useState('');
+    const [Model, setModel] = useState('');
+    const [ Engine_type, setEnginetype] = useState('');
     const [mileage, setMileagedriven] = useState('');
     
 
@@ -32,14 +41,21 @@ const AddVehicleDetailsScreen = () => {
         // Gather all the input values
         const formData = {
             vehicle_type,
+<<<<<<< HEAD
             brand,
             model,
             engine_type,
             mileage: mileage || null,
+=======
+            Brand,
+            Model,
+            Engine_type,
+            mileage,
+>>>>>>> parent of 0db596d (user front end changes. model available vehcile images added)
             firebase_uid 
         };
         
-        fetch(`http://192.168.1.124:8000/vehicle`, {
+        fetch(`http://192.168.1.5:8000/vehicle`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -83,7 +99,7 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your vehicle brand'
-                    value={brand}
+                    value={Brand}
                     onChangeText={text => setBrand(text)}
                 />
 
@@ -91,13 +107,22 @@ const AddVehicleDetailsScreen = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='Enter your vehicle model'
-                    value={model}
+                    value={Model}
                     onChangeText={text => setModel(text)}
                 />
 
                 <Text style={styles.label}>Engine Type</Text>
+<<<<<<< HEAD
                 <SelectList boxStyles={styles.input} dropdownStyles={styles.dropdownStyles} data={engine_types} value={engine_type} setSelected={text => setEnginetype(text)
                 } />
+=======
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter your engine type'
+                    value={Engine_type}
+                    onChangeText={text => setEnginetype(text)}
+                />
+>>>>>>> parent of 0db596d (user front end changes. model available vehcile images added)
 
                 <Text style={styles.label}>Mileage Driven</Text>
                 <TextInput
