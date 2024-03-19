@@ -58,7 +58,7 @@ const styles=StyleSheet.create({
        
     },
     button1:{
-        height:43,
+        height:48,
         backgroundColor:"white",
         borderColor:"white",
          width: '71%',
@@ -84,7 +84,7 @@ const styles=StyleSheet.create({
     
     },
     button2:{
-        height:43,
+        height:48,
         backgroundColor:"white",
         borderColor:"white",
         width: '71%',
@@ -104,7 +104,7 @@ const styles=StyleSheet.create({
         borderRadius:200,
         width:170,
         height:170,
-        marginVertical:250,
+        marginVertical:150,
 
 
     },

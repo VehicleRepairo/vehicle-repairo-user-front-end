@@ -14,6 +14,7 @@ const AddVehicleDetailsScreen = () => {
     const [model, setModel] = useState('');
     const [engine_type, setEnginetype] = useState('');
     const [mileage, setMileagedriven] = useState('');
+    
 
     const vehicles = [
         {key:'Car', value:'Car'},
@@ -34,7 +35,7 @@ const AddVehicleDetailsScreen = () => {
             brand,
             model,
             engine_type,
-            mileage,
+            mileage: mileage || null,
             firebase_uid 
         };
         
@@ -70,8 +71,13 @@ const AddVehicleDetailsScreen = () => {
                 <Text style={styles.title}>Add Vehicle Details</Text>
 
                 <Text style={styles.label}>Vehicle Type</Text>
-                <SelectList boxStyles={styles.input} data={vehicles} setSelected={setVehicletype
-                } />
+                <SelectList 
+                boxStyles={styles.input} 
+                dropdownStyles={styles.dropdownStyles} 
+                placeholder="Select vehicle type" 
+                data={vehicles} 
+                value={vehicle_type}
+                setSelected={text => setVehicletype(text)} />
 
                 <Text style={styles.label}>Brand</Text>
                 <TextInput
@@ -90,7 +96,7 @@ const AddVehicleDetailsScreen = () => {
                 />
 
                 <Text style={styles.label}>Engine Type</Text>
-                <SelectList boxStyles={styles.input} data={engine_types} setSelected={setEnginetype
+                <SelectList boxStyles={styles.input} dropdownStyles={styles.dropdownStyles} data={engine_types} value={engine_type} setSelected={text => setEnginetype(text)
                 } />
 
                 <Text style={styles.label}>Mileage Driven</Text>
@@ -142,10 +148,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
         paddingBottom: 5,
-        paddingTop: 9,
+        paddingTop: 7,
     },
     input: {
-        height: 45,
+        height: 50,
         borderColor: '#1D2B78',
         width: '65%',
         borderWidth: 1,
@@ -161,8 +167,12 @@ const styles = StyleSheet.create({
         fontSize: 22,
         paddingRight: 90,
         paddingBottom: 20,
-        paddingTop: 80,
+        paddingTop: 60,
     },
+    dropdownStyles: {
+        backgroundColor:'lightgray', 
+        maxHeight: 100
+    }
 });
 
 export default AddVehicleDetailsScreen;
