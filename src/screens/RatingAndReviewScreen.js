@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     },
     textReview: {
         borderWidth: 1,
-        borderColor: '#1D2B78',
+        borderColor: "#07305F",
         borderRadius: 25,
         padding: 10,
         marginVertical: 1,
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     },
     button: {
         height: 50,
-        backgroundColor: '#1D2B78',
+        backgroundColor: "#07305F",
         width: '60%',
         borderWidth: 1,
         borderRadius: 53,

@@ -3,6 +3,7 @@ import {View,Text, ImageBackground, StyleSheet,ScrollView,TouchableOpacity,TextI
 import { useNavigation, useRoute} from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
 import { Alert } from 'react-native';
+import { LinearGradient } from "expo-linear-gradient";
 
 
 const BookingAppointmentScreen = () => {
@@ -58,9 +59,21 @@ const BookingAppointmentScreen = () => {
     return(
         <ScrollView>
             <View style={styles.container}>
-            
-             <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg3.png')} style={styles.background}>
-             <Text style={styles.title}>Book an Appointment</Text>
+            <LinearGradient 
+                colors={['#4C617B','#FFFFFF','#FFFFFF']}
+                style={styles.gradient}>
+            <ImageBackground
+            style={{borderBottomRightRadius: 40,
+            borderBottomLeftRadius: 40,
+            height: 240,
+            width: 388,
+            overflow: 'hidden',
+            marginTop:2,
+             
+         }}
+         source={require('../../assets/Images/Sdgp_Images/img6.jpg')} >
+           <Text style={styles.title}>Book an Appointment</Text>
+        </ImageBackground>
            <Text 
            style={styles.name}> Name</Text>
           
@@ -132,10 +145,9 @@ const BookingAppointmentScreen = () => {
             />
 </View>
 
-        <TouchableOpacity onPress={onSubmitPressed} style={styles.button1}>
+        <TouchableOpacity onPress={onSubmitPressed} style={styles.button}>
         <Text style={styles.text}>Submit</Text></TouchableOpacity>
-       
-            </ImageBackground>
+        </LinearGradient>
         </View>
         </ScrollView>
     
@@ -143,27 +155,19 @@ const BookingAppointmentScreen = () => {
 
 };
 const styles=StyleSheet.create({
-    container:{
-        flex:1,
-        
-    },
-    background:{
-        width: '100%',
-        height: '100%',
-    },
-   
-    button1:{
+
+    button:{
         height:52,
-        backgroundColor:'#1D2B78',
-        width: '60%',
+        backgroundColor:"#07305F",
+        width: '62%',
         borderWidth:1,
         borderRadius:55,
         padding:12,
+        marginVertical: 30,
         alignItems: 'center',
         marginLeft:75,
         borderBottomWidth:4,
-        borderColor:'#E2E2E2',
-        marginVertical:40,
+    borderColor:'#E2E2E2'
        
     },
    
@@ -177,21 +181,18 @@ const styles=StyleSheet.create({
     
 
     title:{
-        marginLeft:75,
-        color:'black',
+        marginLeft:60,
+        color:'white',
         fontWeight:'bold',
         fontSize:24,
-        paddingRight:40,
-        paddingBottom:5,
-        paddingTop:20,
-        marginTop:80,
+        marginTop:190,
         
     },
    
 
    name:{
-    paddingTop:23,
-    marginLeft:60,
+        paddingTop:23,
+        marginLeft:60,
         fontWeight:'bold',
         fontSize:15,
         marginLeft:85,
@@ -219,82 +220,91 @@ const styles=StyleSheet.create({
    date:{
         fontWeight:'bold',
         fontSize:15,
-        marginLeft:100,
+        marginLeft:115,
 
     },
    time:{
         fontWeight:'bold',
         fontSize:15,
-        marginLeft:125,
+        marginLeft:110,
   
     },
     textinput1:{
-        height: 47,
-        borderRadius:26,
-        borderColor: '#1D2B78',
-        width: '68%',
-        borderWidth:1,
-        paddingHorizontal:20,
-        padding:8.5,
-        marginVertical: 10,
-        marginLeft:60
-    },
-    textinput2:{
-        height: 47,
-        borderColor: '#1D2B78',
-        width: '68%',
-        borderWidth:1,
-        borderRadius:26,
-        paddingHorizontal:20,
-        padding:8.5,
-        marginVertical: 12,
-        marginLeft:60
-    },
-    textinput3:{
-        height: 47,
-        borderColor: '#1D2B78',
-        width: '68%',
-        borderWidth:1,
-        borderRadius:26,
-        paddingHorizontal:20,
-        padding:8.5,
-        marginVertical: 12,
-        marginLeft:60
-    },
-    textinput4:{
-        height: 47,
-        borderColor: '#1D2B78',
-        width: '68%',
-        borderWidth:1,
-        borderRadius:26,
-        paddingHorizontal:20,
-        padding:8.5,
-        marginVertical: 12,
-        marginLeft:60,
-    },
-    textinput5:{
-        height: 47,
-        borderColor: '#1D2B78',
-        width: '31%',
+        height: 42,
+        borderColor: "#07305F",
+        width: '67%',
         borderWidth:1,
         borderRadius:24,
-        paddingHorizontal:18,
+        paddingHorizontal:20,
         padding:8.5,
+        marginVertical: 12,
+        marginLeft:65,
+    },
+    textinput2:{
+        height: 42,
+        borderColor: "#07305F",
+        width: '67%',
+        borderWidth:1,
+        borderRadius:24,
+        paddingHorizontal:20,
+        padding:8.5,
+        marginVertical: 12,
+        marginLeft:65,
+    },
+    textinput3:{
+        height: 42,
+        borderColor: "#07305F",
+        width: '67%',
+        borderWidth:1,
+        borderRadius:24,
+        paddingHorizontal:20,
+        padding:8.5,
+        marginVertical: 12,
+        marginLeft:65,
+    },
+    textinput4:{
+        height: 42,
+        borderColor: "#07305F",
+        width: '67%',
+        borderWidth:1,
+        borderRadius:24,
+        paddingHorizontal:20,
+        padding:8.5,
+        marginVertical: 12,
+        marginLeft:65,
+    },
+    textinput5:{
+        height: 44,
+        borderColor: "#07305F",
+        width: '32%',
+        borderWidth:1,
+        borderRadius:24,
+        paddingHorizontal:25,
+        padding:12,
         marginVertical: 10,
-       marginLeft:60,
+       marginLeft:70,
   
     },
     textinput6:{
-        height: 47,
-        borderColor: '#1D2B78',
+        height: 44,
+        borderColor: "#07305F",
         width: '24%',
         borderWidth:1,
         borderRadius:24,
-        paddingHorizontal:29,
-     marginLeft:48,
+        paddingHorizontal:30,
+        marginLeft:40,
         marginVertical: 10,
+        marginLeft:30
       
     },
+    gradient:{
+
+        width: '100%',
+        height: '100%',
+        marginBottom:34,
+       
+      
+      },
 
 })
 

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import {View,Text, Image, StyleSheet,ScrollView,Pressable,useWindowDimensions,TouchableOpacity,ImageBackground} from 'react-native'
+import {View,Text, StyleSheet,useWindowDimensions,TouchableOpacity,Image} from 'react-native'
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 
 const StartPageScreen = () => {
 
     const navigation=useNavigation();
-
-    const {height} = useWindowDimensions();
 
     const [Logo, setLogo] = useState({
         logo: require('../../assets/Images/Sdgp_Images/logo.png'),
@@ -26,8 +25,9 @@ const StartPageScreen = () => {
     return(
         
              <View style={styles.container}>
-             
-             <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg4.png')} style={styles.background}>
+             <LinearGradient 
+                colors={['#FFFFFF','#FFFFFF','#95A2B1','#223C5C','#223C5C','#223C5C']}
+                style={styles.gradient}>
 
 <Image source={Logo.logo} style={styles.logo} />
 
@@ -36,27 +36,22 @@ const StartPageScreen = () => {
              <Text style={styles.text1}>Login</Text>
 
          </TouchableOpacity>
-         
          <TouchableOpacity style={styles.button2} onPress={onSignupPressed}>
-
              <Text style={styles.text2}>Sign up</Text>
-
          </TouchableOpacity>
-
-         </ImageBackground>
-           
+        </LinearGradient> 
         </View>
     
     );
 
 };
 const styles=StyleSheet.create({
-    
-    background:{
+    gradient:{
         width: '100%',
         height: '100%',
+        marginBottom:215,
        
-    },
+      },
     button1:{
         height:43,
         backgroundColor:"white",
@@ -72,14 +67,14 @@ const styles=StyleSheet.create({
         marginBottom:10,
     },
     text1:{
-        fontWeight: '200',
-        color: '#1D2B78',
+        fontWeight: '600',
+        color: '#07305F',
         fontSize:17,
 
     },
     text2:{
         fontWeight: '200',
-        color: '#1D2B78',
+        color: '#07305F',
         fontSize:17,
     
     },

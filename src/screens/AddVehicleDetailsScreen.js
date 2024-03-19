@@ -107,10 +107,7 @@ const AddVehicleDetailsScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    },
+   
     background: {
         flex: 1,
         width: '100%',
@@ -121,14 +118,16 @@ const styles = StyleSheet.create({
         paddingTop: 5,
     },
     button: {
-        height: 48,
-        backgroundColor: '#1D2B78',
+        height: 50,
+        backgroundColor:'#07305F',
         width: '65%',
         borderWidth: 1,
         borderRadius: 50,
-        padding: 9,
+        padding: 11,
         marginVertical: 20,
         alignItems: 'center',
+        borderBottomWidth:4,
+        borderColor:'#E2E2E2',
     },
     buttonText: {
         fontWeight: 'bold',
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 45,
-        borderColor: '#1D2B78',
+        borderColor: '#07305F',
         width: '65%',
         borderWidth: 1,
         borderRadius: 25,

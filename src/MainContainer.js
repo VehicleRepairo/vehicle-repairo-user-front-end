@@ -15,7 +15,6 @@ import ProfileScreen from './screens/ProfileScreen';
 import MechanicsPage from './screens/MechanicsPage';
 import MechanicDetailsPage from './screens/MechanicDetailsPage';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import EditProfileScreen from './screens/EditProfileScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -42,7 +41,7 @@ const TabNavigator = () => (
       },
     })}
     tabBarOptions={{ 
-      activeTintColor: "#0073e6",
+      activeTintColor: "#07305F",
       inactiveTintColor: "grey",
       style: { padding: 10, height: 70 },
     }}
@@ -65,7 +64,6 @@ const MainContainer = () => (
       <Stack.Screen name='Mechanic Details' component={MechanicDetailsPage} />
       <Stack.Screen name='Book an Appointment' component={BookingAppointmentScreen} />
       <Stack.Screen name='Rate and Reviews' component={RatingAndReviewScreen} />
-      <Stack.Screen name="Edit" component={EditProfileScreen} />
       <Stack.Screen name='TabNav' component={TabNavigator} />
     </Stack.Navigator>
   </NavigationContainer>

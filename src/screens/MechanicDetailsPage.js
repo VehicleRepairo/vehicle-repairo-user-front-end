@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView, Image, ImageBackground } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+const Separator = () => <View style={styles.separator} />;
 
 const MechanicDetailsPage = ({ route }) => {
   const navigation = useNavigation();
@@ -36,18 +38,19 @@ const MechanicDetailsPage = ({ route }) => {
 
   return (
     <ScrollView>
-       <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg5.jpg')} style={styles.background}>
+      
       <View style={styles.container}>
         <Text style={styles.title}>{mechanicName || 'Username'}</Text>
         <Text style={styles.label2}>Mechanic Id: {mechanicDetails.mech_id}</Text>
         <Image source={{ uri: mechanicDetails.profilepicurl }} style={styles.profilePicture} />
+        <Separator/>
         <Text style={styles.label1}>Average Rating: {mechanicDetails.average_rating} Stars</Text>
        
         {reviews.map((rating, index) => (
           <View key={index} style={styles.ratingContainer}>
             <Text style={styles.label}>Rating: {rating.rating}</Text>
             <Text style={styles.label}>Comment: {rating.comment}</Text>
-            <Text style={styles.label}>Timestamp: {rating.timestamp}</Text>
+            <Text style={styles.label3}>Timestamp: {rating.timestamp}</Text>
             <Text></Text>
           </View>
         ))}
@@ -60,7 +63,7 @@ const MechanicDetailsPage = ({ route }) => {
           <Text style={styles.text1}>Rate Mechanics</Text>
         </TouchableOpacity>
       </View>
-      </ImageBackground>
+
     </ScrollView>
   );
 };
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop:40,
     height: 52,
-    backgroundColor: '#1D2B78',
+    backgroundColor:"#07305F",
     width: '65%',
     borderWidth: 1,
     borderRadius: 50,
@@ -85,14 +88,14 @@ const styles = StyleSheet.create({
   },
   button2: {
     height: 47,
-    borderColor: '#1D2B78',
+    borderColor:"#07305F",
     width: '65%',
     borderWidth: 1,
     borderRadius: 55,
     padding: 10,
     alignItems: 'center',
     marginLeft: 75,
-    borderBottomWidth: 2,
+    borderBottomWidth: 1.5,
   },
   title: {
     fontWeight: 'bold',
@@ -110,6 +113,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
+    marginVertical:1
   },
   text: {
     fontWeight: 'bold',
@@ -129,10 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     //alignItems: 'center',
   },
-  label: {
-    fontSize: 16,
-    //textAlign: 'center', // Align text to center
-  },
+
   label1:{
     marginTop:30,
     marginLeft:30,
@@ -143,11 +144,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft:132
   },
-  background:{
-    width: '100%',
-    height: '100%',
-
-  }
+  label3:{
+    fontSize: 14,
+    color:'#727272'
+    
+  },
+ 
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#E2E2E2',
+    borderBottomWidth:2
+}
 
 });
 

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import useAuthStore from '../store/authStore';
-import { Text, View, StyleSheet,ImageBackground ,TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet,ImageBackground ,TouchableOpacity,ScrollView} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import * as Location from 'expo-location';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const HomeScreen = ({route}) => {
       
@@ -58,29 +59,79 @@ const HomeScreen = ({route}) => {
 
   return (
     <View style={styles.container}>
-     <ImageBackground source={require('../../assets/Images/Sdgp_Images/b1.png')} style={styles.background}>
-     
-     
-      <Text style={styles.Integer}>60000
-      /
-      10000</Text>
+    <ScrollView>
+   
+    <LinearGradient 
+                colors={['#4C617B', '#FFFFFF','#FFFFFF']}
+                style={styles.gradient}>
+
       <Text style={styles.title}>Hello {name || 'Username'} !</Text>
-      <TouchableOpacity style={styles.button1}  onPress={() => sendDataToBackendAndNavigate('Vehicle Service')}>
-             <Text style={styles.text}>Vehicle Service</Text>
+
+      <TouchableOpacity  onPress={() => sendDataToBackendAndNavigate('Vehicle Service')}>
+             <ImageBackground
+         style={{ 
+            height: 140,
+            width: 320,
+            marginLeft:35,   
+            borderRadius: 10, 
+            overflow: 'hidden'       
+         }}
+         source={require('../../assets/Images/Sdgp_Images/img1.png')} >
+             <Text style={styles.text1}>Vehicle Service</Text>
+             </ImageBackground>
          </TouchableOpacity>
          
-         <TouchableOpacity style={styles.button2}  onPress={() => sendDataToBackendAndNavigate('Vehicle Inspection')}>
-             <Text style={styles.text}>Vehicle Inspection</Text>
+         <TouchableOpacity   onPress={() => sendDataToBackendAndNavigate('Vehicle Inspection')}>
+         <ImageBackground
+         style={{
+            marginTop:20,   
+            height: 140,
+            width: 320,
+            marginLeft:35,
+            borderRadius: 10,  
+            overflow: 'hidden' 
+                      
+         }}
+         source={require('../../assets/Images/Sdgp_Images/img2.png')} >
+         <Text style={styles.text2}>Vehicle Inspection</Text>
+         </ImageBackground>
+
          </TouchableOpacity>
-         <TouchableOpacity style={styles.button3} onPress={() => sendDataToBackendAndNavigate('Tyre Repairs')}>
-             <Text style={styles.text}>Tyre Repair</Text>
+
+         <TouchableOpacity  onPress={() => sendDataToBackendAndNavigate('Tyre Repairs')}>
+         <ImageBackground
+         style={{
+            marginTop:20,
+            height: 140,
+            width: 320,
+            marginLeft:35,
+            borderRadius: 10, 
+            overflow: 'hidden' 
+                      
+         }}
+         source={require('../../assets/Images/Sdgp_Images/img3.png')} >
+             <Text style={styles.text3}>Tyre Repair</Text>
+             </ImageBackground>
          </TouchableOpacity>
          
-         <TouchableOpacity style={styles.button4} onPress={() => sendDataToBackendAndNavigate('Vehicle Wash')}>
-             <Text style={styles.text}>Vehicle Wash</Text>
+         <TouchableOpacity onPress={() => sendDataToBackendAndNavigate('Vehicle Wash')}>
+         <ImageBackground
+         style={{
+            marginTop:20,
+            height: 140,
+            width: 320,
+            marginLeft:35,
+            borderRadius: 10, 
+            overflow: 'hidden'    
+         }}
+         source={require('../../assets/Images/Sdgp_Images/img4.png')} >
+             <Text style={styles.text4}>Vehicle Wash</Text>
+             </ImageBackground>
          </TouchableOpacity>
-      
-      </ImageBackground>
+         
+       </LinearGradient>
+         </ScrollView>
+     
      
     </View>
   );
@@ -89,104 +140,43 @@ const HomeScreen = ({route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
-    marginTop:41,
+    backgroundColor:'white',
    
   },
-  background: {
-    flex: 1,
-    resizeMode: 'cover', 
-    
-
-    
-  },
+ 
  title:{
-    fontSize:24,
-    paddingLeft:120,
-    marginBottom:10,
-    color:'black',
-    paddingTop:1,
+  fontSize:27,
+  marginBottom:10,
+  color:'black',
+  padding:20,
+  marginVertical:15,
+  marginLeft:110,
+  marginTop:40,
  },
- button1:{
-  height:58,
-    backgroundColor:'white',
-    borderColor:'#E4E2E2',
-    width: '65%',
-     borderWidth:1,
-     borderRadius:50,
-     padding:12,
-     marginVertical: 15,
-     alignItems: 'center',
-     marginHorizontal:65,
-     marginVertical:25,
-     borderBottomWidth:3,
-   
+ 
+text1:{
+  color:'white',
+  fontSize:20,
+  marginTop:55,
+  marginLeft:110
 },
-button2:{
-  height:58,
-    backgroundColor:'white',
-    borderColor:'#E4E2E2',
-    width: '65%',
-     borderWidth:1,
-     borderRadius:50,
-     padding:12,
-     marginVertical: 15,
-     alignItems: 'center',
-     marginHorizontal:65,
-     marginVertical:25,
-     borderBottomWidth:3,
-    
+text2:{
+  color:'white',
+  fontSize:20,
+  marginTop:50,
+  marginLeft:95
 },
- button3:{
-    height:58,
-    backgroundColor:'white',
-    borderColor:'#E4E2E2',
-    width: '65%',
-     borderWidth:1,
-     borderRadius:50,
-     padding:12,
-     marginVertical: 15,
-     alignItems: 'center',
-     marginHorizontal:65,
-     marginVertical:25,
-     borderBottomWidth:3,
-     
-
-}, 
-button4:{
-  height:58,
-    backgroundColor:'white',
-    borderColor:'#E4E2E2',
-     width: '65%',
-     borderWidth:1,
-     borderRadius:50,
-     padding:12,
-     marginVertical: 15,
-     alignItems: 'center',
-     marginHorizontal:65,
-     marginVertical:25,
-     borderBottomWidth:3,
-    
+text3:{
+  color:'white',
+  fontSize:20,
+  marginTop:55,
+  marginLeft:115
 },
-text:{
-    fontSize:17,
-    paddingVertical:3,
-},
-
-Integer:{
-    backgroundColor:'#BFBFBF',
-    fontSize:12,
-    fontWeight:'800',
-    height: 75,
-    borderColor: '#BFBFBF',
-    width: '20%',
-    borderWidth:1,
-    borderRadius:60,
-    paddingHorizontal:15,
-    padding:20,
-    marginLeft:260,
-    marginVertical:35,
-  
+text4:{
+  color:'white',
+  fontSize:20,
+  marginTop:60,
+  marginLeft:110
 },
 
 

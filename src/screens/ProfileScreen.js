@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -81,9 +82,12 @@ const ProfileScreen = () => {
   };
 
   return (
-    <ScrollView>
+  
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg5.jpg')} style={styles.background}>
+       <LinearGradient 
+                colors={['#4C617B','#FFFFFF','#FFFFFF']}
+                style={styles.gradient}>
+
           <Text style={styles.title}>Account Info </Text>
           <Image source={userData.profilePicture} style={styles.profilePicture} />
           <Text style={styles.title1}>Basic Info </Text>
@@ -95,19 +99,20 @@ const ProfileScreen = () => {
           <TouchableOpacity onPress={onLogoutPressed} style={styles.logoutButton}>
             <Text style={styles.text}>Logout</Text>
           </TouchableOpacity>
-        </ImageBackground>
+        </LinearGradient>
       </View>
-    </ScrollView>
+
   );
 };
 
 
 
 const styles = StyleSheet.create({
-  background: {
+  gradient:{
     width: '100%',
     height: '100%',
-    marginBottom: 300,
+    marginBottom:215,
+   
   },
   profilePicture: {
     marginLeft: 55,
@@ -136,14 +141,14 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     height: 50,
-    backgroundColor: '#1D2B78',
+    backgroundColor: "#07305F",
     width: '38%',
-    borderWidth: 1,
-    borderRadius: 50,
-    paddingHorizontal: 29,
-    padding: 10,
+    borderWidth:1,
+    borderRadius:50,
+    paddingHorizontal:29,
+    padding:10,
     marginVertical: 30,
-    marginLeft: 45,
+    marginLeft:45,
     borderColor: '#1D2B78',
   },
   text: {
