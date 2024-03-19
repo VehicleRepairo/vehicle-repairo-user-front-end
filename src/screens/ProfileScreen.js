@@ -29,11 +29,7 @@ const ProfileScreen = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-<<<<<<< HEAD
-          const response = await fetch(`exp://192.168.1.124:8000/get_appointment_status/${firebase_uid}`);
-=======
-          const response = await fetch(`http://192.168.1.5:8000/get_appointment_status/${firebase_uid}`);
->>>>>>> parent of 0db596d (user front end changes. model available vehcile images added)
+          const response = await fetch(`http://192.168.1.124:8000/get_appointment_status/${firebase_uid}`);
           if (!response.ok) {
             throw new Error('No appointment status');
           }
@@ -49,7 +45,7 @@ const ProfileScreen = () => {
 
     const deleteAppointmentStatus = async () => {
       try {
-        const response = await fetch(`http://192.168.1.5:8000/delete_status/${firebase_uid}`, {
+        const response = await fetch(`http://192.168.1.124:8000/delete_status/${firebase_uid}`, {
           method: 'DELETE',
         });
         if (!response.ok) {
