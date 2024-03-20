@@ -8,7 +8,7 @@ const GuidanceScreen = ({ navigation }) => {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch('http://192.168.1.124:8000/search', {
+      const response = await fetch('http://172.20.10.3:8000/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,9 +37,9 @@ const GuidanceScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text style={{fontWeight:"bold" ,marginTop:110,marginBottom: 20, textAlign: 'center', fontSize: 24 }}>Guidance</Text>
+      <Text style={{fontWeight:"bold" ,marginTop:120, textAlign: 'center', fontSize: 24 }}>Guidance</Text>
       <TextInput
-        style={{ height: 50, borderColor: 'gray', borderWidth: 1, margin: 10, padding: 5 }}
+        style={{ height: 45, borderColor: "#07305F", borderWidth: 1, margin: 10, padding: 13,borderRadius:35,marginVertical:20,width:320,  marginLeft:40}}
         placeholder="Search..."
         onChangeText={text => setSearchText(text)}
         value={searchText}

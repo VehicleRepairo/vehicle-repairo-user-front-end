@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import StarRating from "react-native-star-rating";
@@ -22,32 +22,31 @@ const MechanicsPage = ({ route }) => {
   }, [route.params.responseData]);
 
   const onMechanicPressed = (selectedMechanic) => {
-    navigation.navigate('Mechanic Details', { mechanicDetails: selectedMechanic });
-   
+    navigation.navigate("Mechanic Details", {
+      mechanicDetails: selectedMechanic,
+    });
   };
 
-
-
   return (
+   <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg5.jpg')} style={styles.background}>
     <ScrollView>
       <View style={styles.container}>
-      <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg5.jpg')} style={styles.background}>
         <Text style={styles.title}>Mechanics</Text>
         {mechanicsData.map((mechanic) => (
           <TouchableOpacity
-           onPress={() => onMechanicPressed(mechanic)}
+            onPress={() => onMechanicPressed(mechanic)}
             style={styles.Button1}
             key={mechanic.mech_id}
           >
-            <View >
+            <View style={{ borderBottomWidth: 4, borderColor: "#E2E2E5" }}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={styles.imageWrapper}>
+                <View style={styles.cardContent}>
                   <Image
                     source={{ uri: mechanic.profilepicurl }}
                     style={styles.profilePicture}
                   />
                 </View>
-                <View style={{ marginLeft: 30 }}>
+                <View style={styles.textContainer}>
                   <Text style={styles.label}> {mechanic.name} </Text>
                   <Text style={styles.label}>{mechanic.contact} </Text>
                   <Text style={styles.label}>{mechanic.location} </Text>
@@ -59,26 +58,15 @@ const MechanicsPage = ({ route }) => {
             </View>
           </TouchableOpacity>
         ))}
-        </ImageBackground>
       </View>
     </ScrollView>
+    </ImageBackground>
   );
 };
+
 const styles = StyleSheet.create({
-    imageContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-    },
-    imageWrapper: {
-        marginLeft:2,
-        width: 100,
-        height: 100,
-       
-    },
   container: {
-    backgroundColor: "white",
+    flex: 1,
     padding: 20,
   },
   title: {
@@ -88,40 +76,38 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontWeight: "bold",
   },
+  cardContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
   profilePicture: {
-    borderRadius: 60,
     width: 100,
     height: 100,
-    marginTop: 10,
-    //marginVertical: 20,
+    borderRadius: 50,
+    marginRight: 10,
   },
-  RatingsSection: {
-    alignItems: "center",
-    marginVertical: 5,
-    marginRight: 250,
+  textContainer: {
+    flex: 1,
   },
   label: {
     fontSize: 16,
   },
-  Button1: {
-    borderColor: "#E2E2E2",
-    borderEndWidth:4,
-    backgroundColor: "white",
-    height: 140,
-    width: "90%",
-    borderWidth: 1,
-    marginVertical: 10,
-    marginLeft: 10,
-
-    alignItems: "center",
+  background: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
-  background:{
-    width: '100%',
-    height: '100%',
-
-  }
-
-  
+  Button1: {
+    borderWidth: 1,
+    borderColor: "#E2E2E2",
+    borderRadius: 10,
+    marginBottom: 10,
+  },
 });
 
 export default MechanicsPage;

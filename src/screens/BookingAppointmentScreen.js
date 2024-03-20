@@ -1,25 +1,22 @@
 import React, { useState } from "react";
-import {View,Text, ImageBackground, StyleSheet,ScrollView,TouchableOpacity,TextInput} from 'react-native'
-import { useNavigation, useRoute} from "@react-navigation/native";
+import { View, Text, ImageBackground, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native'
+import { useNavigation, useRoute } from "@react-navigation/native";
 import useAuthStore from '../store/authStore';
 import { Alert } from 'react-native';
 
-
 const BookingAppointmentScreen = () => {
-    const navigation=useNavigation();
+    const navigation = useNavigation();
     const route = useRoute();
-    const [name,setname]= useState('');
-    const [contact,setcontact]= useState('');
-    const [problem,setproblem]=useState('');
-    const [vehicletype,setvehicletype]=useState('');
-    const [date,setdate]=useState('');
-    const [time,settime]=useState('');
-    const {mechanicUid } = route.params;
+    const [name, setname] = useState('');
+    const [contact, setcontact] = useState('');
+    const [problem, setproblem] = useState('');
+    const [vehicletype, setvehicletype] = useState('');
+    const [date, setdate] = useState('');
+    const [time, settime] = useState('');
+    const { mechanicUid } = route.params;
     const { user } = useAuthStore.getState();
     const firebase_uid = user ? user.uid : '';
-   
 
-  
     const onSubmitPressed = () => {
         const requestData = {
             Name: name,
@@ -32,115 +29,89 @@ const BookingAppointmentScreen = () => {
             Mech_uid: mechanicUid
         };
 
-        fetch('http://192.168.1.124:8000/create_appointment', {
+        fetch('http://172.20.10.3:8000/create_appointment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(requestData),
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Appointment created:', data);
-            Alert.alert(
-                "Success",
-                "Appointment booked successfully! If the appointment is declinded it will show on your profile",
-                [{ text: "OK", onPress: () => navigation.navigate('TabNav') }]
-            );
-        })
-        .catch(error => {
-
-            console.error('Error creating appointment:', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Appointment created:', data);
+                Alert.alert(
+                    "Success",
+                    "Appointment booked successfully! If the appointment is declined it will show on your profile",
+                    [{ text: "OK", onPress: () => navigation.navigate('TabNav') }]
+                );
+            })
+            .catch(error => {
+                console.error('Error creating appointment:', error);
+            });
     };
-    
 
-    return(
-        <ScrollView>
-            <View style={styles.container}>
-            
-             <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg3.png')} style={styles.background}>
-             <Text style={styles.title}>Book an Appointment</Text>
-           <Text 
-           style={styles.name}> Name</Text>
-          
-             <TextInput 
-            style={styles.textinput1}
-            placeholder='Enter your name'
-            multiline={true}
-            value={name}
-            onChangeText={(text)=> setname(text)}
-            />
-
-            <Text 
-           style={styles.contact}> Contact</Text> 
-
-             <TextInput 
-            style={styles.textinput2}
-            placeholder='Enter your contact' 
-            multiline={true}
-            value={contact}
-            onChangeText={(text)=> setcontact(text)}
-            />
-
-             <Text 
-           style={styles.problem}>Problem</Text>  
-
-           
-            <TextInput 
-            style={styles.textinput3}
-            placeholder='Enter your problem'
-            multiline={true}
-            value={problem}
-            onChangeText={(text)=> setproblem(text)}
-            />
-
-
-           <Text 
-           style={styles.vehicletype}> Vehicle and Type</Text>         
-            <TextInput 
-            style={styles.textinput4}
-            placeholder='Enter your vehicle and type'
-            multiline={true}
-            value={vehicletype}
-            onChangeText={(text)=> setvehicletype(text)}
-            />
-<View style={{flexDirection:'row'}}>   
-            <Text 
-           style={styles.date}> Date</Text> 
-           
-           <Text 
-           style={styles.time}> Time</Text>
-           </View>   
-           
-<View style={{flexDirection:'row'}}>     
-            <TextInput 
-            style={styles.textinput5}
-            placeholder='DD/MM/YYYY'
-            multiline={true}
-            value={date}
-            onChangeText={(text)=> setdate(text)}
-            />
-       
-         
-            <TextInput 
-            style={styles.textinput6}
-            placeholder='00:00'
-            multiline={true}
-            value={time}
-            onChangeText={(text)=> settime(text)}
-            />
-</View>
-
-        <TouchableOpacity onPress={onSubmitPressed} style={styles.button1}>
-        <Text style={styles.text}>Submit</Text></TouchableOpacity>
-       
-            </ImageBackground>
-        </View>
-        </ScrollView>
-    
+    return (
+        <ImageBackground source={require('../../assets/Images/Sdgp_Images/bg3.png')} style={styles.background}>
+            <ScrollView contentContainerStyle={styles.container}>
+                <Text style={styles.title}>Book an Appointment</Text>
+                <Text style={styles.name}> Name</Text>
+                <TextInput
+                    style={styles.textinput1}
+                    placeholder='Enter your name'
+                    multiline={true}
+                    value={name}
+                    onChangeText={(text) => setname(text)}
+                />
+                <Text style={styles.contact}> Contact</Text>
+                <TextInput
+                    style={styles.textinput2}
+                    placeholder='Enter your contact'
+                    multiline={true}
+                    value={contact}
+                    onChangeText={(text) => setcontact(text)}
+                />
+                <Text style={styles.problem}>Problem</Text>
+                <TextInput
+                    style={styles.textinput3}
+                    placeholder='Enter your problem'
+                    multiline={true}
+                    value={problem}
+                    onChangeText={(text) => setproblem(text)}
+                />
+                <Text style={styles.vehicletype}> Vehicle and Type</Text>
+                <TextInput
+                    style={styles.textinput4}
+                    placeholder='Enter your vehicle and type'
+                    multiline={true}
+                    value={vehicletype}
+                    onChangeText={(text) => setvehicletype(text)}
+                />
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.date}> Date</Text>
+                    <Text style={styles.time}> Time</Text>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <TextInput
+                        style={styles.textinput5}
+                        placeholder='DD/MM/YYYY'
+                        multiline={true}
+                        value={date}
+                        onChangeText={(text) => setdate(text)}
+                    />
+                    <TextInput
+                        style={styles.textinput6}
+                        placeholder='00:00'
+                        multiline={true}
+                        value={time}
+                        onChangeText={(text) => settime(text)}
+                    />
+                </View>
+                <TouchableOpacity onPress={onSubmitPressed} style={styles.button1}>
+                    <Text style={styles.text}>Submit</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        </ImageBackground>
     );
-
 };
 const styles=StyleSheet.create({
     container:{
