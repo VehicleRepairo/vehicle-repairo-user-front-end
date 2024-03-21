@@ -59,11 +59,6 @@ const HomeScreen = ({route}) => {
   return (
     <View style={styles.container}>
      <ImageBackground source={require('../../assets/Images/Sdgp_Images/b1.png')} style={styles.background}>
-     
-     
-      <Text style={styles.Integer}>60000
-      /
-      10000</Text>
       <Text style={styles.title}>Hello {name || 'Username'} !</Text>
       <TouchableOpacity style={styles.button1}  onPress={() => sendDataToBackendAndNavigate('Vehicle Service')}>
              <Text style={styles.text}>Vehicle Service</Text>
@@ -106,6 +101,9 @@ const styles = StyleSheet.create({
     marginBottom:10,
     color:'black',
     paddingTop:1,
+    marginTop:100,
+    marginBottom:50,
+    
  },
  button1:{
   height:58,

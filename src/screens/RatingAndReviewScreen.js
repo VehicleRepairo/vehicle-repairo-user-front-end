@@ -8,18 +8,20 @@ const RatingAndReviewScreen = () => {
     const route = useRoute();
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false); // State to track if form is submitting
     const { mechanicUid } = route.params;
     const backendEndpoint = "http://172.20.10.3:8000/submit_review"; 
 
     const CustomButton = ({ onPress }) => {
         return (
-            <Pressable onPress={onPress} style={styles.button}>
+            <Pressable onPress={onPress} disabled={isSubmitting} style={styles.button}>
                 <Text style={styles.text}>Submit</Text>
             </Pressable>
         )
     }
 
     const onSubmitPressed = () => {
+        setIsSubmitting(true); // Set submitting state to true when button is pressed
 
         const payload = {
             mechanic_id:mechanicUid,
@@ -51,6 +53,9 @@ const RatingAndReviewScreen = () => {
         .catch(error => {
             console.error('Error submitting review:', error);
             // Handle error accordingly
+        })
+        .finally(() => {
+            setIsSubmitting(false); // Set submitting state back to false after request completes
         });
     }
 

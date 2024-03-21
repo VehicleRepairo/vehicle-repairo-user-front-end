@@ -4,7 +4,8 @@ import {
   Text,
   Image,
   StyleSheet,
-  useWindowDimensions,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   Pressable,
   TextInput,
@@ -50,7 +51,7 @@ const SignupScreen = () => {
       navigation.navigate("Add Vehicle Details");
     } catch (error) {
       console.log(error);
-      alert("Signup failed.");
+      alert("Signup failed. Make sure to give password of 6 characters and a proper email");
     } finally {
       setloading(false);
     }
@@ -60,6 +61,10 @@ const SignupScreen = () => {
     navigation.navigate("Add Vehicle Details");
   };
   return (
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
     <ScrollView>
       <View style={styles.container}>
         <Image
@@ -131,6 +136,7 @@ const SignupScreen = () => {
         <CustomButton text="Sign up" onPress={signUp} />
       </View>
     </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 const styles = StyleSheet.create({

@@ -7,7 +7,6 @@ const ProfileScreen = () => {
   const navigation = useNavigation();
   const { user } = useAuthStore.getState();
   const firebase_uid = user ? user.uid : '';
-  //const logout = useAuthStore(state => state.logout); 
   const name = user ? user.email.split('@')[0] : '';
 
   const [userData, setUserData] = useState({
@@ -20,7 +19,7 @@ const ProfileScreen = () => {
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    setReload(false); // Reset reload state when component mounts
+    setReload(false); 
   }, []);
 
   const AppointmentStatus = () => {
@@ -37,6 +36,7 @@ const ProfileScreen = () => {
           setAppointmentStatus(data.appointment_status);
         } catch (error) {
           console.error('Error fetching appointment status:', error);
+          setAppointmentStatus('');
         }
       };
 
@@ -76,7 +76,7 @@ const ProfileScreen = () => {
   };
 
   const onLogoutPressed = async () => {
-    useAuthStore.logout(); // Call the logout function from useAuthStore
+    useAuthStore.getState().logout();
     navigation.navigate('Start Page');
   };
 
