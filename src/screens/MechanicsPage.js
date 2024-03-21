@@ -9,7 +9,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import StarRating from "react-native-star-rating";
+
 
 const MechanicsPage = ({ route }) => {
   const navigation = useNavigation();
