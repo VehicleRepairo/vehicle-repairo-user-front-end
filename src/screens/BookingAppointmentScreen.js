@@ -23,7 +23,7 @@ const BookingAppointmentScreen = () => {
   const [problem, setproblem] = useState("");
   const [vehicletype, setvehicletype] = useState("");
   const [date, setdate] = useState(new Date());
-  const [time, settime] = useState("");
+  const [time, settime] = useState(new Date());
   const { mechanicUid } = route.params;
   const { user } = useAuthStore.getState();
   const firebase_uid = user ? user.uid : "";
@@ -31,6 +31,9 @@ const BookingAppointmentScreen = () => {
 
   const onChange = (e, selectedDate) => {
     setdate(selectedDate);
+  };
+  const onChange2 = (e, selectedTime) => {
+    settime(selectedTime);
   };
 
   const handleContactChange = (text) => {
@@ -40,17 +43,21 @@ const BookingAppointmentScreen = () => {
   };
 
   const onSubmitPressed = () => {
+    // Format date and time strings
+    const formattedDate = date.toISOString().split('T')[0]; // Extract date part
+    const formattedTime = time.toLocaleTimeString('en-US', { hour12: false }); // Format time as HH:MM:SS
+    
     const requestData = {
       Name: name,
       contact: contact,
       Service_Required: problem,
       vehicle: vehicletype,
-      Date_of_appointment: date,
-      Appointments_time: time,
+      Date_of_appointment: formattedDate,
+      Appointments_time: formattedTime,
       user_uid: firebase_uid,
       Mech_uid: mechanicUid,
     };
-
+  
     fetch("http://172.20.10.3:8000/create_appointment", {
       method: "POST",
       headers: {
@@ -71,6 +78,7 @@ const BookingAppointmentScreen = () => {
         console.error("Error creating appointment:", error);
       });
   };
+  ;
 
   return (
     <KeyboardAvoidingView
@@ -133,7 +141,7 @@ const BookingAppointmentScreen = () => {
         value={date}
         mode={"time"}
         is24Hour={true}
-        onChange={onChange}
+        onChange={onChange2}
       />
         </View>
         <TouchableOpacity onPress={onSubmitPressed} style={styles.button1}>
