@@ -81,7 +81,7 @@ const AddVehicleDetailsScreen = () => {
         <Text style={styles.label}>Vehicle Type</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter your vehicle brand"
+          placeholder="Eg: car"
           value={vehicle_type}
           onChangeText={(text) => setVehicletype(text)}
         />
@@ -89,7 +89,7 @@ const AddVehicleDetailsScreen = () => {
         <Text style={styles.label}>Brand</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter your vehicle brand"
+          placeholder="Honda/Toyota"
           value={Brand}
           onChangeText={(text) => setBrand(text)}
         />
@@ -97,7 +97,7 @@ const AddVehicleDetailsScreen = () => {
         <Text style={styles.label}>Model</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter your vehicle model"
+          placeholder="Jazz/Amaze/City"
           value={Model}
           onChangeText={(text) => setModel(text)}
         />
@@ -105,7 +105,7 @@ const AddVehicleDetailsScreen = () => {
         <Text style={styles.label}>Engine Type</Text>
         <TextInput
           style={styles.input}
-          placeholder="Petrol/Diesal/Electric"
+          placeholder="Petrol/Diesal"
           value={Engine_type}
           onChangeText={(text) => setEnginetype(text)}
         />
