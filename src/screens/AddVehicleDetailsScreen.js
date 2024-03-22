@@ -105,7 +105,7 @@ const AddVehicleDetailsScreen = () => {
         <Text style={styles.label}>Engine Type</Text>
         <TextInput
           style={styles.input}
-          placeholder="Petrol/Diesal"
+          placeholder="Petrol/Diesel"
           value={Engine_type}
           onChangeText={(text) => setEnginetype(text)}
         />
@@ -113,7 +113,7 @@ const AddVehicleDetailsScreen = () => {
         <Text style={styles.label}>Mileage Driven</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter your mileage driven"
+          placeholder="Enter your mileage driven in km"
           value={mileage}
           onChangeText={(text) => setMileagedriven(text)}
         />
