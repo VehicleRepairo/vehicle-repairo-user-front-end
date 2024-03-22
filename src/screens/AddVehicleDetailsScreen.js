@@ -81,7 +81,7 @@ const AddVehicleDetailsScreen = () => {
         <Text style={styles.label}>Vehicle Type</Text>
         <TextInput
           style={styles.input}
-          placeholder="Eg: car"
+          placeholder="Eg: Car"
           value={vehicle_type}
           onChangeText={(text) => setVehicletype(text)}
         />
