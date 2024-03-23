@@ -17,6 +17,7 @@ const ProfileScreen = () => {
     });
 
   const [reload, setReload] = useState(false);
+  const [predictions, setPredictions] = useState(null);
 
   useEffect(() => {
     setReload(false); 
@@ -34,9 +35,26 @@ const ProfileScreen = () => {
       if (!response.ok) {
         throw new Error('Failed to predict service');
       }
+      const data = await response.json();
+      setPredictions(data);
     } 
     catch (error) {
       console.error('Error while predicting service:', error);
+    }
+  };
+
+  const renderPredictions = () => {
+    if (predictions) {
+      return (
+        <View>
+          <Text style={styles.label}>Predictions:</Text>
+          {Object.entries(predictions).map(([service, prediction]) => (
+            <Text key={service} style={styles.label}>{`${service}: ${prediction}`}</Text>
+          ))}
+        </View>
+      );
+    } else {
+      return null;
     }
   };
 
@@ -105,13 +123,13 @@ const ProfileScreen = () => {
           <Text style={styles.title}>Account Info </Text>
           <Image source={userData.profilePicture} style={styles.profilePicture} />
           <Text style={styles.title1}>Basic Info </Text>
-
           <Text style={styles.label}>Username: {name}</Text>
           <AppointmentStatus />
           <Text style={styles.label}>Vehicle Service Reminder: {userData.vehicleServiceReminder}</Text>
           <TouchableOpacity style={styles.button} onPress={onPredictPressed}>
             <Text style={styles.buttonText}>Predict Service</Text>
           </TouchableOpacity>
+            {renderPredictions()}
           <TouchableOpacity onPress={onLogoutPressed} style={styles.logoutButton}>
             <Text style={styles.text}>Logout</Text>
           </TouchableOpacity>
