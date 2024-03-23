@@ -22,6 +22,24 @@ const ProfileScreen = () => {
     setReload(false); 
   }, []);
 
+  const onPredictPressed = async () => {
+    try {
+      const response = await fetch(`http://172.20.10.3:8000/predict_service/${firebase_uid}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ firebase_uid })
+      });
+      if (!response.ok) {
+        throw new Error('Failed to predict service');
+      }
+    } 
+    catch (error) {
+      console.error('Error while predicting service:', error);
+    }
+  };
+
   const AppointmentStatus = () => {
     const [appointmentStatus, setAppointmentStatus] = useState('');
 
@@ -91,7 +109,9 @@ const ProfileScreen = () => {
           <Text style={styles.label}>Username: {name}</Text>
           <AppointmentStatus />
           <Text style={styles.label}>Vehicle Service Reminder: {userData.vehicleServiceReminder}</Text>
-
+          <TouchableOpacity style={styles.button} onPress={onPredictPressed}>
+            <Text style={styles.buttonText}>Predict Service</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={onLogoutPressed} style={styles.logoutButton}>
             <Text style={styles.text}>Logout</Text>
           </TouchableOpacity>
