@@ -30,7 +30,6 @@ const ProfileScreen = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ firebase_uid })
       });
       if (!response.ok) {
         throw new Error('Failed to predict service');
@@ -42,6 +41,7 @@ const ProfileScreen = () => {
       console.error('Error while predicting service:', error);
     }
   };
+  
 
   const renderPredictions = () => {
     if (predictions) {
