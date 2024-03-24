@@ -58,7 +58,7 @@ const BookingAppointmentScreen = () => {
       Mech_uid: mechanicUid,
     };
   
-    fetch("http://192.168.1.124:8000/create_appointment", {
+    fetch("https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/create_appointment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

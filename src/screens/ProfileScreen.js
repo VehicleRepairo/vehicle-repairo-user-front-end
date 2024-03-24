@@ -26,7 +26,7 @@ const ProfileScreen = () => {
 
   const onPredictPressed = async () => {
   try {
-    const response = await fetch(`http://192.168.1.124:8000/predict_service/${firebase_uid}`, {
+    const response = await fetch(`https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/predict_service/${firebase_uid}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ const renderPredictions = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://192.168.1.124:8000/get_appointment_status/${firebase_uid}`);
+          const response = await fetch(`https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/get_appointment_status/${firebase_uid}`);
           if (!response.ok) {
             throw new Error('No appointment status');
           }
@@ -92,7 +92,7 @@ const renderPredictions = () => {
 
     const deleteAppointmentStatus = async () => {
       try {
-        const response = await fetch(`http://192.168.1.124:8000/delete_status/${firebase_uid}`, {
+        const response = await fetch(`https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/delete_status/${firebase_uid}`, {
           method: 'DELETE',
         });
         if (!response.ok) {

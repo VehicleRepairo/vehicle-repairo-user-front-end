@@ -10,7 +10,7 @@ const RatingAndReviewScreen = () => {
     const [review, setReview] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false); // State to track if form is submitting
     const { mechanicUid } = route.params;
-    const backendEndpoint = "http://192.168.1.124:8000/submit_review"; 
+    const backendEndpoint = "https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/submit_review"; 
 
     const CustomButton = ({ onPress }) => {
         return (

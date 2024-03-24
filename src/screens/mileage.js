@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, TouchableOpacity, StyleSheet,ImageBackground, SafeAreaView,Alert, Platform} from "react-native"
 import * as Location from "expo-location";
+import useAuthStore from "../store/authStore";
 
 
 export default function Mileage(navigation) {
@@ -8,6 +9,8 @@ export default function Mileage(navigation) {
   const [previousLocation, setPreviousLocation] = useState(null);
   const [totalDistance, setTotalDistance] = useState(0);
   const [isTracking, setIsTracking] = useState(false);
+  const { user } = useAuthStore.getState();
+  const firebase_uid = user ? user.uid : "";
 
   useEffect(() => {
     let intervalId; // Declare intervalId variable outside useEffect
@@ -162,7 +165,7 @@ export default function Mileage(navigation) {
 
   const handlePress = async () => {
     try {
-      const req = await fetch("http://192.168.1.124:8000/mileage/65awgvcydec", {
+      const req = await fetch(`https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/vehicle/${firebase_uid}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -176,7 +179,7 @@ export default function Mileage(navigation) {
   };
   const handlePress2 = async (newMileage) => {
     try {
-      const req = await fetch("http://192.168.1.124:8000/vehicle/65awgvcydec", {
+      const req = await fetch(`https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/mileage/${firebase_uid}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

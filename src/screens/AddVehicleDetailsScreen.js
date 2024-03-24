@@ -39,7 +39,7 @@ const AddVehicleDetailsScreen = () => {
       firebase_uid,
     };
 
-    fetch(`http://192.168.1.124:8000/vehicle`, {
+    fetch(`https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/vehicle`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

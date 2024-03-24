@@ -8,7 +8,7 @@ const GuidanceScreen = ({ navigation }) => {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch('http://192.168.1.124:8000/search', {
+      const response = await fetch('https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

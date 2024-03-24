@@ -24,7 +24,7 @@ const HomeScreen = ({route}) => {
           const { latitude, longitude } = location.coords;
 
           // Send data to the backend
-          const response = await fetch('http://192.168.1.124:8000/nearest_mechanics', {
+          const response = await fetch('https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/nearest_mechanics', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

@@ -12,7 +12,7 @@ const MechanicDetailsPage = ({ route }) => {
 
   useEffect(() => {
     // Fetch additional details from the backend based on the mechanic details
-    fetch(`http://192.168.1.124:8000/ratings/${mechanicDetails.mech_id}`)
+    fetch(`https://vehicle-repairo-back-end-95880a9904c7.herokuapp.com/ratings/${mechanicDetails.mech_id}`)
       .then((response) => response.json())
       .then((data) => {
         setReviews(data);
