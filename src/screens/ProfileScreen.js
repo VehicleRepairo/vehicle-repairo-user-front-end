@@ -10,17 +10,17 @@ const ProfileScreen = () => {
   const name = user ? user.email.split('@')[0] : '';
 
   const [userData, setUserData] = useState({
-      profilePicture: require('../../assets/Images/Sdgp_Images/Mechanic_Profile.png'),
-      userName: 'John',
-      appointmentStatus: 'Scheduled',
-      vehicleServiceReminder: ''
-    });
+    profilePicture: require('../../assets/Images/Sdgp_Images/Mechanic_Profile.png'),
+    userName: 'John',
+    appointmentStatus: 'Scheduled',
+    vehicleServiceReminder: ''
+  });
 
   const [reload, setReload] = useState(false);
   const [predictions, setPredictions] = useState(null);
 
   useEffect(() => {
-    setReload(false); 
+    setReload(false);
   }, []);
 
   const onPredictPressed = async () => {
@@ -36,26 +36,28 @@ const ProfileScreen = () => {
       }
       const data = await response.json();
       setPredictions(data);
-    } 
+    }
     catch (error) {
       console.error('Error while predicting service:', error);
     }
   };
-  
+
 
   const renderPredictions = () => {
     if (predictions) {
       return (
         <View>
           <Text style={styles.label}>Predictions:</Text>
+          <Text key="oil_filter" style={styles.label}>Oil Filter</Text>
+          <Text key="engine_oil" style={styles.label}>Engine Oil</Text>
           {Object.entries(predictions).map(([service, prediction]) => (
-            prediction ? 
-            <Text key={service} style={styles.label}>{service.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</Text> 
-            : null
+            prediction ?
+              <Text key={service} style={styles.label}>{service.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</Text>
+              : null
           ))}
         </View>
       );
-    } 
+    }
     else {
       return null;
     }
