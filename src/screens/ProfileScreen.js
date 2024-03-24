@@ -51,6 +51,7 @@ const ProfileScreen = () => {
       return (
         <View>
           <Text style={styles.label}>Predictions:</Text>
+          <Text style={styles.label}>General and Mandatory Services:</Text>
           <Text key="oil_filter" style={styles.label}>Oil Filter</Text>
           <Text key="engine_oil" style={styles.label}>Engine Oil</Text>
           {Object.entries(predictions).map(([service, prediction]) => (
