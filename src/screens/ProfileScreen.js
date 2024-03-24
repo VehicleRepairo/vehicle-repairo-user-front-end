@@ -32,13 +32,15 @@ const ProfileScreen = () => {
         },
       });
       if (!response.ok) {
-        throw new Error('Failed to predict service');
+        const errorData = await response.json();
+        throw new Error(errorData.error);
       }
       const data = await response.json();
       setPredictions(data);
-    }
+    } 
     catch (error) {
       console.error('Error while predicting service:', error);
+      alert(error.message);
     }
   };
 
