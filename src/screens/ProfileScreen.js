@@ -33,6 +33,7 @@ const ProfileScreen = () => {
       });
       if (!response.ok) {
         const errorData = await response.json();
+        console.error('Error response from backend:', errorData);
         throw new Error(errorData.error);
       }
       const data = await response.json();
