@@ -39,7 +39,7 @@ const AddVehicleDetailsScreen = () => {
       firebase_uid,
     };
 
-    fetch(`http://172.20.10.3:8000/vehicle`, {
+    fetch(`http://192.168.1.124:8000/vehicle`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

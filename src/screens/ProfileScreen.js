@@ -25,50 +25,49 @@ const ProfileScreen = () => {
   }, []);
 
   const onPredictPressed = async () => {
-    try {
-      const response = await fetch(`http://172.20.10.3:8000/predict_service/${firebase_uid}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Error response from backend:', errorData);
-        throw new Error(errorData.error);
-      }
-      const data = await response.json();
-      setPredictions(data);
-    } 
-    catch (error) {
-      console.error('Error while predicting service:', error);
-      setError(error.message);
+  try {
+    const response = await fetch(`http://192.168.1.124:8000/predict_service/${firebase_uid}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Error response from backend:', errorData);
+      throw new Error(errorData.error);
     }
-  };
-  
+    const data = await response.json();
+    setPredictions(data);
+    setError(null); // Clear the error state
+  } catch (error) {
+    console.error('Error while predicting service:', error);
+    setError(error.message);
+  }
+};
 
+// Function to render predictions
+const renderPredictions = () => {
+  if (predictions) {
+    return (
+      <View>
+        <Text style={styles.label}>General and Mandatory Services:</Text>
+        <Text key="oil_filter" style={styles.label}>Oil Filter</Text>
+        <Text key="engine_oil" style={styles.label}>Engine Oil</Text>
+        <Text style={styles.label}>Predictions:</Text>
+        {Object.entries(predictions).map(([service, prediction]) => (
+          prediction ?
+            <Text key={service} style={styles.label}>{service.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</Text>
+            : null
+        ))}
+      </View>
+    );
+  }
+  else {
+    return null;
+  }
+};
 
-  const renderPredictions = () => {
-    if (predictions) {
-      return (
-        <View>
-          <Text style={styles.label}>General and Mandatory Services:</Text>
-          <Text key="oil_filter" style={styles.label}>Oil Filter</Text>
-          <Text key="engine_oil" style={styles.label}>Engine Oil</Text>
-          <br></br>
-          <Text style={styles.label}>Predictions:</Text>
-          {Object.entries(predictions).map(([service, prediction]) => (
-            prediction ?
-              <Text key={service} style={styles.label}>{service.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</Text>
-              : null
-          ))}
-        </View>
-      );
-    }
-    else {
-      return null;
-    }
-  };
 
   const AppointmentStatus = () => {
     const [appointmentStatus, setAppointmentStatus] = useState('');
@@ -76,7 +75,7 @@ const ProfileScreen = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://172.20.10.3:8000/get_appointment_status/${firebase_uid}`);
+          const response = await fetch(`http://192.168.1.124:8000/get_appointment_status/${firebase_uid}`);
           if (!response.ok) {
             throw new Error('No appointment status');
           }
@@ -93,7 +92,7 @@ const ProfileScreen = () => {
 
     const deleteAppointmentStatus = async () => {
       try {
-        const response = await fetch(`http://172.20.10.3:8000/delete_status/${firebase_uid}`, {
+        const response = await fetch(`http://192.168.1.124:8000/delete_status/${firebase_uid}`, {
           method: 'DELETE',
         });
         if (!response.ok) {

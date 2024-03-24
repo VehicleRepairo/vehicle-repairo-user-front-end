@@ -12,7 +12,7 @@ const MechanicDetailsPage = ({ route }) => {
 
   useEffect(() => {
     // Fetch additional details from the backend based on the mechanic details
-    fetch(`http://172.20.10.3:8000/ratings/${mechanicDetails.mech_id}`)
+    fetch(`http://192.168.1.124:8000/ratings/${mechanicDetails.mech_id}`)
       .then((response) => response.json())
       .then((data) => {
         setReviews(data);
