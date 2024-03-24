@@ -18,6 +18,7 @@ const ProfileScreen = () => {
 
   const [reload, setReload] = useState(false);
   const [predictions, setPredictions] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setReload(false);
@@ -41,19 +42,21 @@ const ProfileScreen = () => {
     } 
     catch (error) {
       console.error('Error while predicting service:', error);
-      alert(error.message);
+      setError(error.message);
     }
   };
+  
 
 
   const renderPredictions = () => {
     if (predictions) {
       return (
         <View>
-          <Text style={styles.label}>Predictions:</Text>
           <Text style={styles.label}>General and Mandatory Services:</Text>
           <Text key="oil_filter" style={styles.label}>Oil Filter</Text>
           <Text key="engine_oil" style={styles.label}>Engine Oil</Text>
+          <br></br>
+          <Text style={styles.label}>Predictions:</Text>
           {Object.entries(predictions).map(([service, prediction]) => (
             prediction ?
               <Text key={service} style={styles.label}>{service.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</Text>
@@ -139,6 +142,11 @@ const ProfileScreen = () => {
             <Text style={styles.buttonText}>Predict Service</Text>
           </TouchableOpacity>
             {renderPredictions()}
+            {error && (
+              <View style={styles.errorContainer}>
+                  <Text style={styles.errorText}>{error}</Text>
+              </View>
+            )}
           <TouchableOpacity onPress={onLogoutPressed} style={styles.logoutButton}>
             <Text style={styles.text}>Logout</Text>
           </TouchableOpacity>
