@@ -55,7 +55,8 @@ const ProfileScreen = () => {
           ))}
         </View>
       );
-    } else {
+    } 
+    else {
       return null;
     }
   };
