@@ -49,7 +49,9 @@ const ProfileScreen = () => {
         <View>
           <Text style={styles.label}>Predictions:</Text>
           {Object.entries(predictions).map(([service, prediction]) => (
-            <Text key={service} style={styles.label}>{`${service}: ${prediction}`}</Text>
+            prediction ? 
+            <Text key={service} style={styles.label}>{service.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</Text> 
+            : null
           ))}
         </View>
       );
@@ -137,6 +139,7 @@ const ProfileScreen = () => {
       </View>
     </ScrollView>
   );
+
 };
 
 
