@@ -4,7 +4,7 @@ import { View, TextInput, FlatList, Text } from 'react-native';
 const GuidanceScreen = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [error, setError] = useState(null); // State to hold error
+  const [error, setError] = useState(null); 
 
   const handleSearch = async () => {
     try {
