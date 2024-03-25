@@ -137,7 +137,7 @@ const renderPredictions = () => {
           <Text style={styles.label}>Username: {name}</Text>
           <AppointmentStatus />
           <Text style={styles.label}>Vehicle Service Reminder: {userData.vehicleServiceReminder}</Text>
-          <TouchableOpacity style={styles.button} onPress={onPredictPressed}>
+          <TouchableOpacity onPress={onPredictPressed} style={styles.predictButton}>
             <Text style={styles.buttonText}>Predict Service</Text>
           </TouchableOpacity>
             {renderPredictions()}
@@ -224,6 +224,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold'
   
+  },
+  predictButton: {
+    height: 50,
+    backgroundColor: '#1D2B78',
+    width: '64%',
+    borderWidth: 1,
+    borderRadius: 50,
+    borderColor: '#1D2B78',
+    marginLeft: 45,
+    padding: 10,
+    paddingLeft: 50
   }
 });
 
